@@ -1,8 +1,8 @@
 import { createWebHistory, createRouter } from 'vue-router'
 import Login from '../components/Login.vue'
 import SignUp from '../components/SignUp.vue'
-import Main from '../components/Main.vue'
-import PublicPage from '../components/PublicPage.vue'
+//import Main from '../components/Main.vue'
+//import PublicPage from '../components/PublicPage.vue'
 import CurrentSymptoms from '../components/CurrentSymptoms.vue'
 import Content from '../components/Content.vue'
 import ContentPublic from '../components/ContentPublic.vue'
@@ -28,73 +28,103 @@ const routes = [
       path: '/login', 
       name: 'Login',
       component: Login,
-      showRoute: ['public']
+      showRoute: ['public'],
+      meta: {
+        hideNavbar: true,
+      }
     },
     { 
       path: '/signup', 
       name: 'Sign up',
       component: SignUp,
-      showRoute: ['public']
+      showRoute: ['public'],
+      meta: {
+        hideNavbar: true,
+      }
     },
-    { 
+/*     { 
       path: '/main', 
       name: 'Main',
       component: Main,
       showRoute: ['private']
-    },
-    { 
+    }, */
+/*     { 
       path: '/public', 
       name: 'Public',
       component: PublicPage,
       showRoute: ['public', 'private']
-    },
+    }, */
     { 
       path: '/currentSymptoms', 
       name: 'Current Symptoms',
       component: CurrentSymptoms,
-      showRoute: ['public', 'private']
+      showRoute: ['public', 'private'],
+      meta: {
+        hideNavbar: true,
+      }
     },
     { 
       path: '/multipleChoice', 
       name: 'MultipleChoice',
       component: MultipleChoice,
-      showRoute: ['public', 'private']
+      showRoute: ['public', 'private'],
+      meta: {
+        hideNavbar: true,
+      }
     },
     { 
       path: '/twoChoice', 
       name: 'TwoChoice',
       component: TwoChoice,
-      showRoute: ['public', 'private']
+      showRoute: ['public', 'private'],
+      meta: {
+        hideNavbar: true,
+      }
     },
     { 
       path: '/dragMultipleChoice', 
       name: 'DragMultipleChoice',
       component: DragMultipleChoice,
-      showRoute: ['public', 'private']
+      showRoute: ['public', 'private'],
+      meta: {
+        hideNavbar: true,
+      }
     },
     { 
       path: '/orderOptions', 
       name: 'OrderOptions',
       component: OrderOptions,
-      showRoute: ['public', 'private']
+      showRoute: ['public', 'private'],
+      meta: {
+        hideNavbar: true,
+      }
     },
     { 
       path: '/main2', 
       name: 'Main2',
       component: Main2,
-      showRoute: ['public', 'private']
+      showRoute: ['public'],
+      meta: {
+        hideNavbar: false,
+      }
     },
     { 
       path: '/beginGame', 
       name: 'BeginGame',
       component: BeginGame,
-      showRoute: ['public', 'private']
+      showRoute: ['public'],
+      meta: {
+        hideNavbar: true,
+      }
     },
     { 
       path: '/endGame', 
       name: 'EndGame',
       component: EndGame,
-      showRoute: ['public', 'private']
+      showRoute: ['public'],
+      meta: {
+        hideNavbar: true,
+      }
     },
     
 
@@ -102,19 +132,28 @@ const routes = [
       path: '/userProfile', 
       name: 'UserProfile',
       component: UserProfile,
-      showRoute: ['public', 'private']
+      showRoute: ['public', 'private'],
+      meta: {
+        hideNavbar: false,
+      }
     },
     { 
       path: '/userStatus', 
       name: 'UserStatus',
       component: UserStatus,
-      showRoute: ['public', 'private']
+      showRoute: ['public', 'private'],
+      meta: {
+        hideNavbar: false,
+      }
     },
     { 
       path: '/scoreboard', 
       name: 'Scoreboard',
       component: Scoreboard,
-      showRoute: ['public', 'private']
+      showRoute: ['public', 'private'],
+      meta: {
+        hideNavbar: false,
+      }
     },
     
     { 

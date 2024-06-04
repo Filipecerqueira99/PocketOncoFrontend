@@ -89,7 +89,7 @@ export default {
         }, 5000)
     },
     signup(){
-
+      this.$router.push("/signup")
     }
   }
 }

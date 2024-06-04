@@ -78,7 +78,7 @@ export default {
     background-color: #2c84a700;
     border: 0;
     cursor: pointer;
-    margin-left: 38px;
+    margin-left: 30px;
     margin-top: 2px;
     margin-bottom: 2px;
     border-radius: 20px;

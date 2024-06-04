@@ -179,12 +179,12 @@ input {
 }
 
 .buttonLogin {
-  margin-top: 30px;
+  margin-bottom: 30px;
   padding: 10px;
   border-radius: 22px;
   background-color: #a9e7ff;
   border: 0;
-  color: white;
+  color: black;
   cursor: pointer;
   width: 50%;
   font-size: 18px;

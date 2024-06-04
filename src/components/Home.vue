@@ -6,7 +6,7 @@
           <div class="main-content">
             <router-view />
             <!-- <Navbar /> -->
-            <BottomBar/>
+            <BottomBar v-if="!$route.meta.hideNavbar"/>
           </div>
             
         </div>
@@ -25,9 +25,9 @@
       BottomBar
     },
     methods: {
-      isSigned() {
+/*       isSigned() {
         return localStorage.getItem('user');
-      },
+      }, */
       textStyling(path) {
         return this.$route.fullPath === path ? "underline" : "noline"
       },
@@ -50,6 +50,7 @@
         Popup: false,
         lockedRoutes: [],
         publicRoutes: [],
+        isSigned: false,
       }
     }
   }
