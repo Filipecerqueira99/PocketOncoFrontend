@@ -15,6 +15,7 @@ import Main2 from '../components/Main2.vue'
 import BeginGame from '../components/BeginGame.vue'
 import EndGame from '../components/EndGame.vue'
 import UserProfile from '../components/UserProfile.vue'
+import UserGeral from '../components/UserGeral.vue'
 import UserStatus from '../components/UserStatus.vue'
 import Scoreboard from '../components/Scoreboard.vue'
 
@@ -126,12 +127,20 @@ const routes = [
         hideNavbar: true,
       }
     },
-    
 
     { 
       path: '/userProfile', 
       name: 'UserProfile',
       component: UserProfile,
+      showRoute: ['public', 'private'],
+      meta: {
+        hideNavbar: false,
+      }
+    },
+    { 
+      path: '/userGeral', 
+      name: 'UserGeral',
+      component: UserGeral,
       showRoute: ['public', 'private'],
       meta: {
         hideNavbar: false,

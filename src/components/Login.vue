@@ -148,6 +148,9 @@ export default {
   }
 
   .buttonGoogle{
+    display: flex;
+  align-items: center;
+  justify-content: center;
     margin-top: 30px;
     padding: 10px;
     border-radius: 30px;

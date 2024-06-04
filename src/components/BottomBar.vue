@@ -1,6 +1,6 @@
 <template>
     <div v-if="isSigned()" class="outsideBox">
-        <button class="buttonNav" :style="{ border: selectedPage == '/main2' ? '3px solid white' : '0px' }"
+        <button class="buttonNav marginLeftNo" :style="{ border: selectedPage == '/main2' ? '3px solid white' : '0px' }"
             @click="action('/main2')">
             <img class="iconImg" src="../assets/icons/home.png" alt="Home" />
         </button>
@@ -15,8 +15,8 @@
             @click="action('/scoreboard')">
             <img class="iconImg" src="../assets/icons/scoreboard.png" alt="Home" />
         </button>
-        <button class="buttonNav" :style="{ border: selectedPage == '/userProfile' ? '3px solid white' : '0px' }"
-            @click="action('/userProfile')">
+        <button class="buttonNav" :style="{ border: selectedPage == '/userGeral' ? '3px solid white' : '0px' }"
+            @click="action('/userGeral')">
             <img class="iconImg" src="../assets/icons/user.png" alt="Home" />
         </button>
     </div>
@@ -70,7 +70,7 @@ export default {
     background: rgb(9, 93, 126);
     background: linear-gradient(90deg, rgba(9, 93, 126, 1) 0%, rgba(46, 134, 169, 1) 100%);
     border-radius: 30px;
-    text-align: left;
+    text-align: center;
 }
 
 
@@ -83,6 +83,11 @@ export default {
     margin-bottom: 2px;
     border-radius: 20px;
 }
+
+.marginLeftNo{
+    margin-left: 0px;
+}
+
 
 .iconImg {
     width: 35px;
