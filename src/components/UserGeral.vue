@@ -18,6 +18,92 @@
         <img class="userImg" src="../assets/mainimg.png" alt="mainimg" /><br>
     </div>
 
+    <div class="outsideBox">
+        <div class="Column">
+            <div class="friendName">Nível</div>
+            <div class="outsideLevelPoints">
+                5
+            </div>
+        </div>
+        <div class="ColumnLine">
+            <img class="lineImg" src="../assets/line.png" alt="mainimg" />
+        </div>
+        <div class="Column">
+            <div class="friendName">Dias</div>
+            <div class="outsideLevelPoints">
+                3
+            </div>
+        </div>
+        <div class="ColumnLine">
+            <img class="lineImg" src="../assets/line.png" alt="mainimg" />
+        </div>
+        <div class="Column">
+            <div class="friendName">Amigos</div>
+            <div class="outsideLevelPoints">
+                2
+            </div>
+        </div>
+    </div>
+
+    <div class="titleContainer">Sugestões de Amigos</div>
+
+    <div class="outsideBoxFriends">
+        <div class="ColumnFriends">
+            <div class="friendName">Amigo1</div>
+            <img class="friendsImg" src="../assets/loginimg.png" alt="friendsImg" />
+            <div class="addFriends">
+                Adicionar
+            </div>
+        </div>
+        <div class="ColumnFriends">
+            <div class="friendName">Amigo1</div>
+            <img class="friendsImg" src="../assets/loginimg.png" alt="friendsImg" />
+            <div class="addFriends">
+                Adicionar
+            </div>
+        </div>
+        <div class="ColumnFriends">
+            <div class="friendName">Amigo1</div>
+            <img class="friendsImg" src="../assets/loginimg.png" alt="friendsImg" />
+            <div class="addFriends">
+                Adicionar
+            </div>
+        </div>
+    </div>
+
+    <div class="titleContainer">Progresso Semanal</div>
+
+    <table>
+        <tr>
+            <th></th>
+            <th></th>
+            <th class="header">Pontos</th>
+            <th class="header">Corretos</th>
+            <th class="header">Erros</th>
+        </tr>
+        <tr>
+            <td class="thisWeek">Esta<br>Semana</td>
+            <td class="lineTD"><img class="lineImgTable" src="../assets/line.png" alt="mainimg" /></td>
+            <td><b>2</b></td>
+            <td><b>2</b></td>
+            <td><b>2</b></td>
+        </tr>
+        <tr>
+            <td class="lastWeek">Semana<br>Passada</td>
+            <td><img class="lineImgTable" src="../assets/line.png" alt="mainimg" /></td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+        </tr>
+    </table>
+
+    <div class="subTitleContainer">Parabéns! Continua com este ritmo!</div>
+
+    <div class="buttonOnRight">
+        <button class="buttonNext" @click.prevent="settins()"><img class="iconImg" src="../assets/icons/setting.png"
+                alt="setting" />  Definições</button>
+    </div>
+
 
 </template>
 
@@ -97,11 +183,88 @@ export default {
             setTimeout(() => {
             }, 5000);
         },
+        settins(){
+            this.$router.push("/userProfile")
+        }
     },
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.buttonOnRight{
+    text-align: right;
+}
+
+.buttonNext {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px;
+    margin-top: 10px;
+    border-radius: 22px;
+    background: #14967F;
+    font-size: 14px;
+    border: 0;
+    color: white;
+    cursor: pointer;
+    width: 40%;
+}
+
+.lineTD {
+    vertical-align: middle;
+}
+
+.header {
+    font-weight: 500;
+    width: 70px;
+}
+
+.lastWeek {
+    color: #3b3b3b;
+}
+
+.thisWeek {
+    font-weight: bold;
+}
+
+.friendsImg {
+    width: 50px;
+    height: 70px;
+    margin-bottom: 0px;
+}
+
+.addFriends {
+    background-color: #4897B6;
+    color: white;
+    border-radius: 20px;
+    margin: 4px;
+    font-size: 15px;
+}
+
+.ColumnFriends {
+    display: table-cell;
+    background-color: #BDECFF;
+    border-radius: 20px;
+    box-shadow: 0px 3px 1px 1px #abbec6;
+}
+
+.outsideBoxFriends {
+    background-color: #DEF6FF;
+    box-shadow: 0px 8px 5px 5px #abbec6;
+    margin-bottom: 30px;
+    border-radius: 30px;
+
+    display: table;
+    width: 100%;
+    /*Optional*/
+    table-layout: fixed;
+    /*Optional*/
+    border-spacing: 10px;
+    /*Optional*/
+}
+
 .imageBox {
     position: fixed;
     top: 35px;
@@ -118,10 +281,26 @@ export default {
     align-items: center;
 }
 
-.userImg{
+.userImg {
     width: 50px;
     height: 80px;
     margin-left: 30px;
+}
+
+.lineImg {
+    width: 10px;
+    height: 50px;
+}
+
+.lineImgTable {
+    width: 8px;
+    height: 60px;
+}
+
+.ColumnLine {
+    display: table-cell;
+    width: 0px;
+    vertical-align: bottom;
 }
 
 .outsideBox {
@@ -129,7 +308,25 @@ export default {
     display: table;
     width: 100%;
     table-layout: fixed;
+
 }
+
+.friendName {
+    margin-top: 5px;
+}
+
+.outsideLevelPoints {
+    border-radius: 20px;
+    margin: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.Column {
+    display: table-cell;
+    border-radius: 30px;
+}
+
 
 .Column1 {
     display: table-cell;

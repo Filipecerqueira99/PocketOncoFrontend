@@ -71,6 +71,9 @@ export default {
     background: linear-gradient(90deg, rgba(9, 93, 126, 1) 0%, rgba(46, 134, 169, 1) 100%);
     border-radius: 30px;
     text-align: center;
+
+    box-shadow: 0px 3px 1px 1px #8c9ba1;
+
 }
 
 
