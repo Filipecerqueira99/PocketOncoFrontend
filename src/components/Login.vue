@@ -1,6 +1,6 @@
 <template>
     <form>
-      <p class="title">PocketOnco DASDOFHISPDOFIPNODSFPISDA</p>
+      <p class="title">PocketOnco</p>
       <img class="loginImg" src="../assets/loginimg.png" alt="Folder" /><br>
       Email
       <input type="text" v-model="email" placeholder=""><br>
