@@ -194,6 +194,7 @@ export default {
 
 .buttonOnRight{
     text-align: right;
+    margin-bottom: 100px
 }
 
 .buttonNext {
@@ -266,7 +267,7 @@ export default {
 }
 
 .imageBox {
-    position: fixed;
+    position: absolute;
     top: 35px;
     right: 20px;
 
