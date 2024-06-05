@@ -2,7 +2,15 @@
     <div class="titleContainer">Desafios</div>
     <div class="subTitleContainer">Como estão os teus amigos:</div>
     <div class="outsideBox">
-        <div class="Column">
+        <div class="Column" v-for="friend in this.friendsValues" :key="friend.idUser">
+            <div class="friendName">{{ friend.name }}</div>
+            <img class="loginImg" src="../assets/loginimg.png" alt="Folder" />
+            <div class="outsideLevelPoints">
+                <div class="detailsFriend">nivel {{ friend.level }}</div>
+                <div class="detailsFriend">{{ friend.streak }} dias</div>
+            </div>
+        </div>
+<!--         <div class="Column">
             <div class="friendName">Amigo1</div>
             <img class="loginImg" src="../assets/loginimg.png" alt="Folder" />
             <div class="outsideLevelPoints">
@@ -17,15 +25,7 @@
                 <div>Nivel: </div>
                 <div>Pontos: </div>
             </div>
-        </div>
-        <div class="Column">
-            <div class="friendName">Amigo1</div>
-            <img class="loginImg" src="../assets/loginimg.png" alt="Folder" />
-            <div class="outsideLevelPoints">
-                <div>Nivel: </div>
-                <div>Pontos: </div>
-            </div>
-        </div>
+        </div> -->
     </div>
 
     <div class="title">Tabela de Pontos</div>
@@ -74,7 +74,8 @@ export default {
             points: 0,
             streak: 0,
             level: 0,
-            userResultsList: 0
+            userResultsList: 0,
+            friendsValues: 0
         };
     },
     async created() {
@@ -87,6 +88,28 @@ export default {
         this.streak = JSON.parse(localStorage.getItem("streak"));
         this.level = JSON.parse(localStorage.getItem("level"));
 
+
+        //friends levels and points
+        try {
+             const res = await api({
+                 method: "post",
+                 url: `/users/getFriendsLevelPoints`,
+                 data: {
+                     "idUser": this.idUser,
+                 },
+             }).catch((error) => {
+                 console.log(error);
+             });
+             
+             console.log(res.data)
+             this.friendsValues = res.data;
+             
+         } catch (error) {
+             console.log(error.response?.data)
+         }
+
+
+        //scoreboard
          try {
              const res = await api({
                  method: "post",
@@ -121,6 +144,13 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+
+.detailsFriend{
+    margin-top: -5px;
+    font-size: 14px;
+}
+
 .scoreboard {
     width: 80%;
     margin: 0 auto;
@@ -202,18 +232,35 @@ export default {
     /*Optional*/
     border-spacing: 10px;
     /*Optional*/
+
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevents the items from wrapping to the next line */
 }
 
+
 .Column {
-    display: table-cell;
     background-color: #BDECFF;
     border-radius: 30px;
     box-shadow: 0px 3px 1px 1px #abbec6;
+
+
+    flex: 0 0 auto; /* Prevent resizing and ensure all items have the same width */
+    width: 150px; /* Fixed width for each item */
+    height: 170px; /* Fixed height for each item */
+    margin: 10px;
+    background-color: lightblue;
+    /*display: flex;*/
+    align-items: center;
+    justify-content: center;
+
 }
 
 .friendName {
     margin-top: 5px;
-    font-weight: 600;
+    font-size: 15px;
+    padding: 5px;
+    font-weight: 400;
 }
 
 .outsideLevelPoints {
