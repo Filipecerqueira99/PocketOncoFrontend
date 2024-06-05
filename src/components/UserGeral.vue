@@ -16,7 +16,7 @@
     </div>
 
     <div v-if="addFriendsLabel" class="friendsBox">
-        <input type="text" v-model="emailAdd" placeholder="">
+        <input type="text" v-model="emailAdd" placeholder="email">
         <button class="buttonAddFriend" @click.prevent="sendFriendRequest(emailAdd)">Adicionar</button>
     </div>
 
@@ -128,7 +128,18 @@
                 alt="setting" /> Definições</button>
     </div>
 
-
+    <div>
+        &nbsp;<br>
+        &nbsp;<br>
+        &nbsp;<br>
+        &nbsp;<br>
+        &nbsp;<br>
+        &nbsp;<br>
+        &nbsp;<br>
+        &nbsp;<br>
+        &nbsp;<br>
+        &nbsp;<br>
+    </div>
 </template>
 
 <script>
@@ -252,9 +263,9 @@ export default {
 
 input {
     border-radius: 30px;
-    padding: 10px;
+    padding: 6px;
     border: 1px solid #bdecff;
-    font-size: 16px;
+    font-size: 14px;
     background-color: #BDECFF;
     color: #000000;
     width: 50%;
@@ -272,8 +283,8 @@ input {
     border: 0;
     color: white;
     cursor: pointer;
-    width: 30%;
-    margin-left: 10px;
+    width: 25%;
+    margin-left: 5px;
 }
 
 .buttonOnRight {
