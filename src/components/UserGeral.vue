@@ -173,7 +173,7 @@ export default {
                         console.log(error);
                     });
                     console.log(res.data)
-                    toast.warn(res.data, {
+                    toast.info(res.data, {
                         autoClose: 3000,
                     });
                 } catch (error) {

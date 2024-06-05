@@ -18,9 +18,11 @@
 
         <div class="result">Conseguiste um total de: <b>{{ this.numberAnswersCorrect }}</b> respostas corretas!</div>
 
-        <div class="answerCorrect" v-if="parseInt(this.numberAnswersCorrect) >= 4">Que resultado Fantástico! Ótimo trabalho!
+        <div class="answerCorrect" v-if="parseInt(this.numberAnswersCorrect) >= 4">Que resultado Fantástico! Ótimo
+            trabalho!
             🎉</div>
-        <div class="answerMid" v-if="parseInt(this.numberAnswersCorrect) == 3">Estás a meio caminho do sucesso! Continua a
+        <div class="answerMid" v-if="parseInt(this.numberAnswersCorrect) == 3">Estás a meio caminho do sucesso! Continua
+            a
             esforçar-te, cada passo é um progresso. 🚀</div>
         <div class="answerWrong" v-if="parseInt(this.numberAnswersCorrect) < 3">O resultado não foi o melhor porém estás
             no caminho certo! Continua a tentar, estás a aprender! 🌟</div>
@@ -34,7 +36,7 @@
 <script>
 import api from "../api/api.js";
 import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css'; 
+import 'vue3-toastify/dist/index.css';
 /* eslint-disable */
 export default {
     name: "BeginGame",
@@ -62,17 +64,23 @@ export default {
             }
         })
 
-        if(points>=100){
+        if (points >= 100) {
             localStorage.setItem('points', 0);
             localStorage.setItem('level', level + 1);
-        }else{
+        } else {
             localStorage.setItem('points', points);
         }
-        
 
-        toast.info(response.data, {
-				autoClose: 3000,
-			  });
+        var texto = ""
+        if (response.data > 0) {
+            texto = "Recebeste " + this.numberAnswersCorrect + " pontos! Continua assim! 🎆";
+        } else {
+            texto = "Recebeste 0 pontos! Na próxima certamente vai correr melhor! 🍀";
+        }
+
+        toast.info(texto, {
+            autoClose: 3000,
+        });
     },
     methods: {
         goBack() {
