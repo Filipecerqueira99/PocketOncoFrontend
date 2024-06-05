@@ -6,7 +6,7 @@
     <div class="outsideBox" v-if="this.friendsValues">
         <div class="Column" v-for="friend in this.friendsValues" :key="friend.idUser">
             <div class="friendName">{{ friend.name }}</div>
-            <img class="loginImg" src="../assets/loginimg.png" alt="Folder" />
+            <img class="loginImg" :src="require(`../assets/profile/` + friend.img + `.png`)" alt="friend" />
             <div class="outsideLevelPoints">
                 <div class="detailsFriend">nivel {{ friend.level }}</div>
                 <div class="detailsFriend">{{ friend.streak }} dias</div>
@@ -222,7 +222,7 @@ export default {
 }
 
 .loginImg {
-    width: 50px;
+    width: 80px;
     height: 80px;
     margin-bottom: 0px;
 }

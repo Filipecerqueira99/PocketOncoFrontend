@@ -374,8 +374,8 @@ input {
 }
 
 .friendsImg {
-    width: 50px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     margin-bottom: 0px;
 }
 
@@ -399,10 +399,10 @@ input {
 }
 
 .selectUserImg{
-    width: 50px;
+    width: 80px;
     height: 80px;
     margin-left: 30px;
-    background-color: #BDECFF;
+    /*background-color: #BDECFF;*/
     border-radius: 20px;
 }
 
@@ -471,9 +471,9 @@ input {
 }
 
 .userImg {
-    width: 50px;
+    width: 80px;
     height: 80px;
-    margin-left: 30px;
+    margin-left: 15px;
 }
 
 .lineImg {

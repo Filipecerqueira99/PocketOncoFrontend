@@ -21,7 +21,7 @@
             <button class="buttonNext" @click.prevent="dailyGame()">Começar</button>
         </div>
         <div class="revisionImgContainer">
-            <img class="revisionImg" src="../assets/mainimg.png" alt="Dor" />
+            <img class="revisionImg" src="../assets/doctors/img1.png" alt="Dor" />
         </div>
     </div>
 

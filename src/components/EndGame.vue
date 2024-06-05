@@ -8,7 +8,7 @@
             </div> -->
         </div>
         <div class="revisionImgContainer">
-            <img class="revisionImg" src="../assets/mainimg.png" alt="Boneco" />
+            <img class="revisionImg" src="../assets/doctors/img4.png" alt="Boneco" />
         </div>
     </div>
 
