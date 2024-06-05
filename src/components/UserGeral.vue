@@ -194,7 +194,7 @@ export default {
 
 .buttonOnRight{
     text-align: right;
-    margin-bottom: 100px
+    margin-bottom: 200px
 }
 
 .buttonNext {
