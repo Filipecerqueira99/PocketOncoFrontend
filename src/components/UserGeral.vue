@@ -6,12 +6,18 @@
                 <div class="subTitleContainer">Registado desde aaaaaaaaaa</div>
             </div>
             <div class="twoButtons">
-                <button class="buttonAddFriends" @click.prevent="dailyGame()"><img class="iconImg"
-                        src="../assets/icons/addFriends.png" alt="addFriends" /> Adicionar Amigos</button>
+                <button class="buttonAddFriends" @click.prevent="addFriendsLabel = !addFriendsLabel"><img
+                        class="iconImg" src="../assets/icons/addFriends.png" alt="addFriends" /> Adicionar
+                    Amigos</button>
                 <button class="buttonShare" @click.prevent="dailyGame()"><img class="iconImg"
                         src="../assets/icons/share.png" alt="share" /> </button>
             </div>
         </div>
+    </div>
+
+    <div v-if="addFriendsLabel" class="friendsBox">
+        <input type="text" v-model="emailAdd" placeholder="">
+        <button class="buttonAddFriend" @click.prevent="addFriend(emailAdd)">Adicionar</button>
     </div>
 
     <div class="imageBox">
@@ -20,32 +26,37 @@
 
     <div class="outsideBox">
         <div class="Column">
-            <div class="friendName">Nível</div>
-            <div class="outsideLevelPoints">
-                5
-            </div>
-        </div>
-        <div class="ColumnLine">
-            <img class="lineImg" src="../assets/line.png" alt="mainimg" />
-        </div>
-        <div class="Column">
             <div class="friendName">Dias</div>
             <div class="outsideLevelPoints">
-                3
+                {{ this.streak }}
             </div>
         </div>
         <div class="ColumnLine">
             <img class="lineImg" src="../assets/line.png" alt="mainimg" />
         </div>
         <div class="Column">
-            <div class="friendName">Amigos</div>
+            <div class="friendName">Nível</div>
             <div class="outsideLevelPoints">
-                2
+                {{ this.level }}
+            </div>
+        </div>
+        <div class="ColumnLine">
+            <img class="lineImg" src="../assets/line.png" alt="mainimg" />
+        </div>
+        <div class="Column">
+            <div class="friendName">Pontos</div>
+            <div class="outsideLevelPoints">
+                {{ this.points }}
             </div>
         </div>
     </div>
 
-    <div class="titleContainer">Sugestões de Amigos</div>
+    <div class="titleContainer">Sugestões de Amigos
+        <div class="buttonListRequests">
+            <button class="buttonListRequestsFriends" @click.prevent="dailyGame()">Ver pedidos Amizade</button>
+        </div>
+    </div>
+
 
     <div class="outsideBoxFriends">
         <div class="ColumnFriends">
@@ -70,6 +81,8 @@
             </div>
         </div>
     </div>
+
+
 
     <div class="titleContainer">Progresso Semanal</div>
 
@@ -100,8 +113,8 @@
     <div class="subTitleContainer">Parabéns! Continua com este ritmo!</div>
 
     <div class="buttonOnRight">
-        <button class="buttonNext" @click.prevent="settins()"><img class="iconImg" src="../assets/icons/setting.png"
-                alt="setting" />  Definições</button>
+        <button class="buttonNext" @click.prevent="settings()"><img class="iconImg" src="../assets/icons/setting.png"
+                alt="setting" /> Definições</button>
     </div>
 
 
@@ -109,7 +122,6 @@
 
 <script>
 /* eslint-disable */
-import { stringifyQuery } from 'vue-router';
 import api from '../api/api.js'
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
@@ -125,6 +137,11 @@ export default {
             lastname: "",
             age: "",
             editMode: false,
+            points: 0,
+            streak: 0,
+            level: 0,
+            addFriendsLabel: false,
+            emailAdd: "",
         };
     },
     async created() {
@@ -133,66 +150,75 @@ export default {
         this.firstname = localStorage.getItem('first_name').slice(1).slice(0, -1);
         this.lastname = localStorage.getItem('last_name').slice(1).slice(0, -1);
         this.age = localStorage.getItem('age');
-
+        this.points = JSON.parse(localStorage.getItem("points"));
+        this.streak = JSON.parse(localStorage.getItem("streak"));
+        this.level = JSON.parse(localStorage.getItem("level"));
 
     },
     methods: {
-        async editProfile(email, currentPassword, newPassword, firstname, lastname, age) {
-            console.log(email, currentPassword, newPassword, firstname, lastname, age)
-            if (email === "" || firstname === "" || lastname === "" || age === "") {
-                toast.warn("Porfavor preencha todos os campos.", {
-                    autoClose: 3000,
-                });
-            } else {
+        settings() {
+            this.$router.push("/userProfile")
+        },
+        async addFriend(email) {
+            if (email != "") {
                 try {
                     const res = await api({
                         method: "post",
-                        url: `/users/editprofile`,
+                        url: `/users/sendFriendRequest`,
                         data: {
-                            "idUser": this.idUser,
+                            "idUser1": this.idUser,
                             "email": email,
-                            "currentPassword": currentPassword,
-                            "newPassword": newPassword,
-                            "first_name": firstname,
-                            "last_name": lastname,
-                            "age": age,
                         },
                     }).catch((error) => {
                         console.log(error);
                     });
-                    if (typeof res.data === "object") {
-                        toast.success("Utilizador atualizado com sucesso!", {
-                            autoClose: 3000,
-                        });
-                        localStorage.setItem('email', email);
-                        localStorage.setItem('first_name', firstname);
-                        localStorage.setItem('last_name', lastname);
-                        localStorage.setItem('age', age);
-                    } else {
-                        toast.warn(res.data, {
-                            autoClose: 3000,
-                        });
-                    }
-
+                    console.log(res.data)
+                    toast.warn(res.data, {
+                        autoClose: 3000,
+                    });
                 } catch (error) {
                     toast.warn(error.response?.data, {
                         autoClose: 3000,
                     });
                 }
             }
-            setTimeout(() => {
-            }, 5000);
-        },
-        settins(){
-            this.$router.push("/userProfile")
         }
     },
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.friendsBox {
+    display: block ruby;
+}
 
-.buttonOnRight{
+input {
+    border-radius: 30px;
+    padding: 10px;
+    border: 1px solid #bdecff;
+    font-size: 16px;
+    background-color: #BDECFF;
+    color: #000000;
+    width: 50%;
+}
+
+.buttonAddFriend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    margin-top: 10px;
+    border-radius: 22px;
+    background: #2C85A7;
+    font-size: 12px;
+    border: 0;
+    color: white;
+    cursor: pointer;
+    width: 30%;
+    margin-left: 10px;
+}
+
+.buttonOnRight {
     text-align: right;
     margin-bottom: 200px
 }
@@ -355,6 +381,25 @@ export default {
     display: flex;
 }
 
+.buttonListRequests {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.buttonListRequestsFriends {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    background: #2C85A7;
+    font-size: 12px;
+    border: 0;
+    color: white;
+    cursor: pointer;
+    width: 85%;
+}
+
+
 .buttonShare {
     display: flex;
     align-items: center;
@@ -371,6 +416,8 @@ export default {
     width: 15%;
 }
 
+
+
 .buttonAddFriends {
     display: flex;
     align-items: center;
@@ -383,8 +430,9 @@ export default {
     border: 0;
     color: white;
     cursor: pointer;
-    width: 50%;
+    width: 45%;
 }
+
 
 .left {
     text-align: left;
