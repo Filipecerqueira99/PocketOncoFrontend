@@ -1,7 +1,9 @@
 <template>
     <div class="titleContainer">Desafios</div>
     <div class="subTitleContainer">Como estão os teus amigos:</div>
-    <div class="outsideBox">
+    <div class="subtitle" v-if="!this.userResultsList">Adiciona amigos para veres como eles estão!</div>
+
+    <div class="outsideBox" v-if="this.friendsValues">
         <div class="Column" v-for="friend in this.friendsValues" :key="friend.idUser">
             <div class="friendName">{{ friend.name }}</div>
             <img class="loginImg" src="../assets/loginimg.png" alt="Folder" />

@@ -70,7 +70,14 @@
     </div>
 
     <div class="outsideBoxFriends">
-        <div class="ColumnFriends">
+        <div class="ColumnFriends" v-for="friend in this.friendsSugestionList" :key="friend.idUser">
+            <div class="friendName">{{ friend.first_name }}</div>
+            <img class="friendsImg" :src="require(`../assets/profile/` + friend.img + `.png`)" alt="friendsImg" />
+            <div class="addFriends" @click.prevent="sendFriendRequest(friend.email)">
+                Adicionar
+            </div>
+        </div>
+        <!-- <div class="ColumnFriends">
             <div class="friendName">Amigo1</div>
             <img class="friendsImg" src="../assets/loginimg.png" alt="friendsImg" />
             <div class="addFriends">
@@ -83,14 +90,7 @@
             <div class="addFriends">
                 Adicionar
             </div>
-        </div>
-        <div class="ColumnFriends">
-            <div class="friendName">Amigo1</div>
-            <img class="friendsImg" src="../assets/loginimg.png" alt="friendsImg" />
-            <div class="addFriends">
-                Adicionar
-            </div>
-        </div>
+        </div> -->
     </div>
 
 
@@ -158,7 +158,8 @@ export default {
             addFriendsLabel: false,
             friendsRequestsLabel: false,
             emailAdd: "",
-            friendsRequestsList: {}
+            friendsRequestsList: {},
+            friendsSugestionList: {}
         };
     },
     async created() {
@@ -170,6 +171,22 @@ export default {
         this.points = JSON.parse(localStorage.getItem("points"));
         this.streak = JSON.parse(localStorage.getItem("streak"));
         this.level = JSON.parse(localStorage.getItem("level"));
+
+        try {
+            const res = await api({
+                method: "post",
+                url: `/users/getSugestedNewFriends`,
+                data: {
+                    "idUser": this.idUser,
+                },
+            }).catch((error) => {
+                console.log(error);
+            });
+            console.log(res.data)
+            this.friendsSugestionList = res.data;
+        } catch (error) {
+            console.log(error.response?.data)
+        }
 
     },
     methods: {
@@ -330,6 +347,7 @@ input {
     border-radius: 20px;
     margin: 4px;
     font-size: 15px;
+    cursor: pointer;
 }
 
 .backgroundFriendsRequests {
@@ -344,13 +362,23 @@ input {
 }
 
 .ColumnFriends {
-    display: table-cell;
     background-color: #BDECFF;
-    border-radius: 20px;
+    border-radius: 30px;
     box-shadow: 0px 3px 1px 1px #abbec6;
+
+
+    flex: 0 0 auto; /* Prevent resizing and ensure all items have the same width */
+    width: 130px; /* Fixed width for each item */
+    height: 150px; /* Fixed height for each item */
+    margin: 10px;
+    background-color: lightblue;
+    /*display: flex;*/
+    align-items: center;
+    justify-content: center;
+
 }
 
-.outsideBoxFriends {
+.outsideBoxFriends{
     background-color: #DEF6FF;
     box-shadow: 0px 8px 5px 5px #abbec6;
     margin-bottom: 30px;
@@ -363,7 +391,12 @@ input {
     /*Optional*/
     border-spacing: 10px;
     /*Optional*/
+
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevents the items from wrapping to the next line */
 }
+
 
 .imageBox {
     position: absolute;

@@ -68,7 +68,11 @@
                 <div class="boxText">44%</div>
             </div>
         </div> -->
-
+        <div>
+        &nbsp;<br>
+        &nbsp;<br>
+        &nbsp;<br>
+    </div>
 </template>
 
 <script>
