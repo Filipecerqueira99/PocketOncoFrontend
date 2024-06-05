@@ -2,7 +2,7 @@
     <div class="titleContainer">Os teus resultados:</div>
     <div class="left">Nível {{ level }}</div>
     <div class="outsideBox">
-        <div class="insideBox" :style="{ width: points + '%'}">
+        <div class="insideBox" :style="{ width: points + '%' }">
             <div class="boxText">{{ points }}%</div>
         </div>
     </div>
@@ -10,7 +10,8 @@
     <div class="missionDay left">Missões do Dia</div>
 
     <div class="outsideBoxMission">
-        <div class="Column" v-for="mission in this.missions" :key="mission.idMission" :style="{ backgroundColor: mission.current_value == mission.goal ? '#2C85A7' : '#BDECFF' }">
+        <div class="Column" v-for="mission in this.missions" :key="mission.idMission"
+            :style="{ backgroundColor: mission.current_value == mission.goal ? '#2C85A7' : '#BDECFF' }">
             <div class="friendName">{{ mission.description }}</div>
             <div class="outsideLevelPoints">
                 <b>{{ mission.current_value }}/{{ mission.goal }}</b>
@@ -32,42 +33,42 @@
     <!-- <div>Missões todas concluidas!</div> -->
 
     <div class="achievements left">Conquistas</div>
-    <div>
-        <div class="left">Conquista 1:</div>
+    <div v-for="award in this.awards" :key="award.award_id">
+        <div class="left">{{ award.categoryName }} - {{ award.description }}</div>
         <div class="outsideBox">
-            <div class="insideBox">
-                <div class="boxText">44%</div>
-            </div>
-        </div>
-
-        <div class="left">Conquista 1:</div>
-        <div class="outsideBox">
-            <div class="insideBox">
-                <div class="boxText">44%</div>
-            </div>
-        </div>
-
-        <div class="left">Conquista 1:</div>
-        <div class="outsideBox">
-            <div class="insideBox">
-                <div class="boxText">44%</div>
-            </div>
-        </div>
-
-        <div class="left">Conquista 1:</div>
-        <div class="outsideBox">
-            <div class="insideBox">
-                <div class="boxText">44%</div>
-            </div>
-        </div>
-
-        <div class="left">Conquista 1:</div>
-        <div class="outsideBox">
-            <div class="insideBox">
-                <div class="boxText">44%</div>
+            <div class="insideBox" :style="{ width: Math.round(award.current_value * 100 / award.goal) + '%' }">
+                <div class="boxText">{{ Math.round(award.current_value * 100 / award.goal) }}%</div>
             </div>
         </div>
     </div>
+    <!-- <div class="left">Conquista 1:</div>
+        <div class="outsideBox">
+            <div class="insideBox">
+                <div class="boxText">44%</div>
+            </div>
+        </div>
+
+        <div class="left">Conquista 1:</div>
+        <div class="outsideBox">
+            <div class="insideBox">
+                <div class="boxText">44%</div>
+            </div>
+        </div>
+
+        <div class="left">Conquista 1:</div>
+        <div class="outsideBox">
+            <div class="insideBox">
+                <div class="boxText">44%</div>
+            </div>
+        </div>
+
+        <div class="left">Conquista 1:</div>
+        <div class="outsideBox">
+            <div class="insideBox">
+                <div class="boxText">44%</div>
+            </div>
+        </div> -->
+
 </template>
 
 <script>
@@ -85,6 +86,7 @@ export default {
             streak: 0,
             level: 0,
             missions: {},
+            awards: {},
         };
     },
     async created() {
@@ -97,24 +99,43 @@ export default {
         this.streak = JSON.parse(localStorage.getItem("streak"));
         this.level = JSON.parse(localStorage.getItem("level"));
 
-        //friends levels and points
+        //getDailyMissions
         try {
-             const res = await api({
-                 method: "post",
-                 url: `/users/getDailyMissions`,
-                 data: {
-                     "idUser": this.idUser,
-                 },
-             }).catch((error) => {
-                 console.log(error);
-             });
-             
-             console.log(res.data)
-             this.missions = res.data;
-             
-         } catch (error) {
-             console.log(error.response?.data)
-         }
+            const res = await api({
+                method: "post",
+                url: `/users/getDailyMissions`,
+                data: {
+                    "idUser": this.idUser,
+                },
+            }).catch((error) => {
+                console.log(error);
+            });
+
+            console.log(res.data)
+            this.missions = res.data;
+
+        } catch (error) {
+            console.log(error.response?.data)
+        }
+
+        //user awards
+        try {
+            const res = await api({
+                method: "post",
+                url: `/users/getUserAwards`,
+                data: {
+                    "idUser": this.idUser,
+                },
+            }).catch((error) => {
+                console.log(error);
+            });
+
+            console.log(res.data)
+            this.awards = res.data;
+
+        } catch (error) {
+            console.log(error.response?.data)
+        }
 
     },
     methods: {
@@ -190,7 +211,7 @@ export default {
     box-shadow: 0px 3px 1px 1px #abbec6;
     font-size: 15px;
     margin-top: 20px;
-    
+
 }
 
 .friendName {
@@ -199,10 +220,9 @@ export default {
     width: 80%;
 }
 
-.outsideLevelPoints{
+.outsideLevelPoints {
     width: 20%;
     display: flex;
     align-items: center;
 }
-
 </style>
