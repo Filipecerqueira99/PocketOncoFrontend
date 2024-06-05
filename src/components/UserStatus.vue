@@ -10,13 +10,13 @@
     <div class="missionDay left">Missões do Dia</div>
 
     <div class="outsideBoxMission">
-        <div class="Column">
-            <div class="friendName">Missão 1</div>
+        <div class="Column" v-for="mission in this.missions" :key="mission.idMission" :style="{ backgroundColor: mission.current_value == mission.goal ? '#2C85A7' : '#BDECFF' }">
+            <div class="friendName">{{ mission.description }}</div>
             <div class="outsideLevelPoints">
-                <div>Nivel: </div>
+                <b>{{ mission.current_value }}/{{ mission.goal }}</b>
             </div>
         </div>
-        <div class="Column">
+        <!-- <div class="Column">
             <div class="friendName">Missão 2</div>
             <div class="outsideLevelPoints">
                 <div>Nivel: </div>
@@ -27,9 +27,9 @@
             <div class="outsideLevelPoints">
                 <div>Nivel: </div>
             </div>
-        </div>
+        </div> -->
     </div>
-    <div>Missões todas concluidas!</div>
+    <!-- <div>Missões todas concluidas!</div> -->
 
     <div class="achievements left">Conquistas</div>
     <div>
@@ -71,7 +71,7 @@
 </template>
 
 <script>
-//import api from '../api/api.js'
+import api from '../api/api.js'
 /* eslint-disable */
 export default {
     name: "UserStatus", data() {
@@ -84,6 +84,7 @@ export default {
             points: 0,
             streak: 0,
             level: 0,
+            missions: {},
         };
     },
     async created() {
@@ -96,7 +97,24 @@ export default {
         this.streak = JSON.parse(localStorage.getItem("streak"));
         this.level = JSON.parse(localStorage.getItem("level"));
 
-
+        //friends levels and points
+        try {
+             const res = await api({
+                 method: "post",
+                 url: `/users/getDailyMissions`,
+                 data: {
+                     "idUser": this.idUser,
+                 },
+             }).catch((error) => {
+                 console.log(error);
+             });
+             
+             console.log(res.data)
+             this.missions = res.data;
+             
+         } catch (error) {
+             console.log(error.response?.data)
+         }
 
     },
     methods: {
@@ -156,7 +174,7 @@ export default {
     margin-bottom: 0px;
     border-radius: 30px;
 
-    display: table;
+    /* display: table; */
     width: 100%;
     /*Optional*/
     table-layout: fixed;
@@ -166,13 +184,25 @@ export default {
 }
 
 .Column {
-    display: table-cell;
+    display: flex;
     background-color: #BDECFF;
-    border-radius: 30px;
+    border-radius: 20px;
     box-shadow: 0px 3px 1px 1px #abbec6;
+    font-size: 15px;
+    margin-top: 20px;
+    
 }
 
 .friendName {
     margin-top: 5px;
-    font-weight: 600;
-}</style>
+    font-weight: 500;
+    width: 80%;
+}
+
+.outsideLevelPoints{
+    width: 20%;
+    display: flex;
+    align-items: center;
+}
+
+</style>
