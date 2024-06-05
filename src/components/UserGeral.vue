@@ -25,13 +25,20 @@
     </div>
 
     <div class="allImageBox" v-if="changeImgProfile">
-        Escolhe uma imagem de perfil:<br>
+        <br>
+        Escolhe uma imagem de perfil:<br><br>
         <img class="selectUserImg" src="../assets/profile/img1.png" alt="mainimg" @click.prevent="changeProfileImage('img1')" />
         <img class="selectUserImg" src="../assets/profile/img2.png" alt="mainimg" @click.prevent="changeProfileImage('img2')" />
         <img class="selectUserImg" src="../assets/profile/img3.png" alt="mainimg" @click.prevent="changeProfileImage('img3')" /><br>
         <img class="selectUserImg" src="../assets/profile/img4.png" alt="mainimg" @click.prevent="changeProfileImage('img4')"  />
         <img class="selectUserImg" src="../assets/profile/img5.png" alt="mainimg" @click.prevent="changeProfileImage('img5')" />
-        <img class="selectUserImg" src="../assets/profile/img6.png" alt="mainimg" @click.prevent="changeProfileImage('img6')" />
+        <img class="selectUserImg" src="../assets/profile/img6.png" alt="mainimg" @click.prevent="changeProfileImage('img6')" /><br>
+        <img class="selectUserImg" src="../assets/profile/img7.png" alt="mainimg" @click.prevent="changeProfileImage('img7')" />
+        <img class="selectUserImg" src="../assets/profile/img8.png" alt="mainimg" @click.prevent="changeProfileImage('img8')" />
+        <img class="selectUserImg" src="../assets/profile/img9.png" alt="mainimg" @click.prevent="changeProfileImage('img9')" /><br>
+        <img class="selectUserImg" src="../assets/profile/img10.png" alt="mainimg" @click.prevent="changeProfileImage('img10')"  />
+        <img class="selectUserImg" src="../assets/profile/img11.png" alt="mainimg" @click.prevent="changeProfileImage('img11')" />
+        <img class="selectUserImg" src="../assets/profile/img12.png" alt="mainimg" @click.prevent="changeProfileImage('img12')" /><br>
     </div>
 
     <div class="outsideBox">
@@ -401,7 +408,8 @@ input {
 .selectUserImg{
     width: 80px;
     height: 80px;
-    margin-left: 30px;
+    margin-right: 10px;
+    margin-left: 10px;
     /*background-color: #BDECFF;*/
     border-radius: 20px;
 }

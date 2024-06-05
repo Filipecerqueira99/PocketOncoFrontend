@@ -39,7 +39,7 @@
                 <div class="score-row">
                     <div class="position">{{ friend.position }}º</div>
                     <div class="name">{{ friend.name }}</div>
-                    <div class="points">{{ friend.weekly_points }}</div>
+                    <div class="points">{{ friend.weekly_points }}pts</div>
                 </div>
                 <!--             <div class="score-row">
                 <div class="position">2</div>

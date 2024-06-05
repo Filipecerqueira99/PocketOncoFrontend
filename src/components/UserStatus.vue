@@ -11,7 +11,7 @@
 
     <div class="outsideBoxMission">
         <div class="Column" v-for="mission in this.missions" :key="mission.idMission"
-            :style="{ backgroundColor: mission.current_value == mission.goal ? '#2C85A7' : '#BDECFF' }">
+            :style="{ backgroundColor: mission.current_value == mission.goal ? '#14967FA3' : '#BDECFF' }">
             <div class="friendName">{{ mission.description }}</div>
             <div class="outsideLevelPoints">
                 <b>{{ mission.current_value }}/{{ mission.goal }}</b>
