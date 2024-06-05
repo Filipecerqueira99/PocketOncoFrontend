@@ -1,12 +1,12 @@
 <template>
     <div class="titleContainer">Os teus resultados:</div>
-    <div class="left">Nível 3</div>
+    <div class="left">Nível {{ level }}</div>
     <div class="outsideBox">
-        <div class="insideBox">
-            <div class="boxText">44%</div>
+        <div class="insideBox" :style="{ width: points + '%'}">
+            <div class="boxText">{{ points }}%</div>
         </div>
     </div>
-    <div class="right">Para o nível 4</div>
+    <div class="right">{{ (100 - points) + "% até nível " + (level + 1) }}</div>
     <div class="missionDay left">Missões do Dia</div>
 
     <div class="outsideBoxMission">
@@ -71,9 +71,37 @@
 </template>
 
 <script>
+//import api from '../api/api.js'
 /* eslint-disable */
 export default {
-    name: "UserStatus",
+    name: "UserStatus", data() {
+        return {
+            idUser: "",
+            email: "",
+            firstname: "",
+            lastname: "",
+            age: "",
+            points: 0,
+            streak: 0,
+            level: 0,
+        };
+    },
+    async created() {
+        this.idUser = localStorage.getItem('idUser');
+        this.email = localStorage.getItem('email').slice(1).slice(0, -1);
+        this.firstname = localStorage.getItem('first_name').slice(1).slice(0, -1);
+        this.lastname = localStorage.getItem('last_name').slice(1).slice(0, -1);
+        this.age = localStorage.getItem('age');
+        this.points = parseInt(JSON.parse(localStorage.getItem("points")));
+        this.streak = JSON.parse(localStorage.getItem("streak"));
+        this.level = JSON.parse(localStorage.getItem("level"));
+
+
+
+    },
+    methods: {
+
+    }
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -88,7 +116,6 @@ export default {
 
 .titleContainer {
     display: flex;
-    margin-top: 10px;
     font-size: 20px;
     font-weight: 600;
 }

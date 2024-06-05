@@ -31,6 +31,12 @@
 
     </div>
     <button class="buttonBack" @click.prevent="goBack()">Menu Inicial</button>
+
+    <div>
+        &nbsp;<br>
+        &nbsp;<br>
+        &nbsp;<br>
+    </div>
 </template>
 
 <script>
