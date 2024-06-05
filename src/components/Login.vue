@@ -71,6 +71,8 @@ export default {
               localStorage.setItem('points', JSON.stringify(response.data.points));
               localStorage.setItem('streak', JSON.stringify(response.data.streak));
               localStorage.setItem('level', JSON.stringify(response.data.level));
+              localStorage.setItem('img', JSON.stringify(response.data.img));
+
               console.log(response.data)
               this.$router.push("/main2")
               this.showMessage = "login successful"

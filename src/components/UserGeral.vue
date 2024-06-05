@@ -7,7 +7,7 @@
             </div>
             <div class="twoButtons">
                 <button class="buttonAddFriends" @click.prevent="addFriendsLabel = !addFriendsLabel"><img
-                        class="iconImg" src="../assets/icons/addFriends.png" alt="addFriends" /> Adicionar
+                        class="iconImg"  src="../assets/icons/share.png" alt="addFriends" /> Adicionar
                     Amigos</button>
                 <button class="buttonShare" @click.prevent="dailyGame()"><img class="iconImg"
                         src="../assets/icons/share.png" alt="share" /> </button>
@@ -20,8 +20,18 @@
         <button class="buttonAddFriend" @click.prevent="sendFriendRequest(emailAdd)">Adicionar</button>
     </div>
 
-    <div class="imageBox">
-        <img class="userImg" src="../assets/mainimg.png" alt="mainimg" /><br>
+    <div class="imageBox" @click.prevent="changeImgProfile = !changeImgProfile">
+        <img class="userImg" :src="require(`../assets/profile/` + img + `.png`)" alt="mainimg" /><br>
+    </div>
+
+    <div class="allImageBox" v-if="changeImgProfile">
+        Escolhe uma imagem de perfil:<br>
+        <img class="selectUserImg" src="../assets/profile/img1.png" alt="mainimg" @click.prevent="changeProfileImage('img1')" />
+        <img class="selectUserImg" src="../assets/profile/img2.png" alt="mainimg" @click.prevent="changeProfileImage('img2')" />
+        <img class="selectUserImg" src="../assets/profile/img3.png" alt="mainimg" @click.prevent="changeProfileImage('img3')" /><br>
+        <img class="selectUserImg" src="../assets/profile/img4.png" alt="mainimg" @click.prevent="changeProfileImage('img4')"  />
+        <img class="selectUserImg" src="../assets/profile/img5.png" alt="mainimg" @click.prevent="changeProfileImage('img5')" />
+        <img class="selectUserImg" src="../assets/profile/img6.png" alt="mainimg" @click.prevent="changeProfileImage('img6')" />
     </div>
 
     <div class="outsideBox">
@@ -151,6 +161,7 @@ export default {
             firstname: "",
             lastname: "",
             age: "",
+            img: "",
             editMode: false,
             points: 0,
             streak: 0,
@@ -159,7 +170,8 @@ export default {
             friendsRequestsLabel: false,
             emailAdd: "",
             friendsRequestsList: {},
-            friendsSugestionList: {}
+            friendsSugestionList: {},
+            changeImgProfile: false,
         };
     },
     async created() {
@@ -171,6 +183,7 @@ export default {
         this.points = JSON.parse(localStorage.getItem("points"));
         this.streak = JSON.parse(localStorage.getItem("streak"));
         this.level = JSON.parse(localStorage.getItem("level"));
+        this.img = localStorage.getItem('img').slice(1).slice(0, -1);
 
         try {
             const res = await api({
@@ -256,6 +269,31 @@ export default {
                 this.friendsRequestsList = res.data;
                 console.log(this.friendsRequestsList)
 
+            } catch (error) {
+                toast.warn(error.response?.data, {
+                    autoClose: 3000,
+                });
+            }
+        },
+        async changeProfileImage(imgRecieved){
+            try {
+                const res = await api({
+                    method: "post",
+                    url: `/users/editImgProfile`,
+                    data: {
+                        "idUser": this.idUser,
+                        "img": imgRecieved,
+                    },
+                }).catch((error) => {
+                    console.log(error);
+                });
+                toast.info(res.data, {
+                        autoClose: 3000,
+                    });
+                this.changeImgProfile = false
+                localStorage.setItem('img', JSON.stringify(imgRecieved));
+                this.img = imgRecieved
+                console.log(this.img)
             } catch (error) {
                 toast.warn(error.response?.data, {
                     autoClose: 3000,
@@ -348,6 +386,24 @@ input {
     margin: 4px;
     font-size: 15px;
     cursor: pointer;
+}
+
+.allImageBox{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: rgb(9, 93, 126);
+    background: linear-gradient(90deg, rgba(9, 93, 126, 1) 0%, rgba(46, 134, 169, 1) 100%);
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0px 3px 1px 1px #abbec6;
+}
+
+.selectUserImg{
+    width: 50px;
+    height: 80px;
+    margin-left: 30px;
+    background-color: #BDECFF;
+    border-radius: 20px;
 }
 
 .backgroundFriendsRequests {
