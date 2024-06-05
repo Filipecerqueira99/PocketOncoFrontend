@@ -17,7 +17,7 @@
 
     <div v-if="addFriendsLabel" class="friendsBox">
         <input type="text" v-model="emailAdd" placeholder="">
-        <button class="buttonAddFriend" @click.prevent="addFriend(emailAdd)">Adicionar</button>
+        <button class="buttonAddFriend" @click.prevent="sendFriendRequest(emailAdd)">Adicionar</button>
     </div>
 
     <div class="imageBox">
@@ -53,10 +53,21 @@
 
     <div class="titleContainer">Sugestões de Amigos
         <div class="buttonListRequests">
-            <button class="buttonListRequestsFriends" @click.prevent="dailyGame()">Ver pedidos Amizade</button>
+            <button class="buttonListRequestsFriends" @click.prevent="listFriendRequests()">Ver
+                pedidos Amizade</button>
         </div>
     </div>
 
+    <div class="backgroundFriendsRequests" v-if="friendsRequestsLabel">
+        <div class="titleRequestsContainer">Pedidos de amizade:</div>
+        <!-- v-if="friendsRequestsLabel" -->
+        <div v-for="friend in this.friendsRequestsList" :key="friend.idUserFriendsRequests">
+            <div class="friendRequestsContainer">
+                <button class="buttonListRequestsFriendsAdd" @click.prevent="addFriend(friend.email)">Adicionar</button>
+                {{ friend.email }}
+            </div>
+        </div>
+    </div>
 
     <div class="outsideBoxFriends">
         <div class="ColumnFriends">
@@ -141,7 +152,9 @@ export default {
             streak: 0,
             level: 0,
             addFriendsLabel: false,
+            friendsRequestsLabel: false,
             emailAdd: "",
+            friendsRequestsList: {}
         };
     },
     async created() {
@@ -159,7 +172,7 @@ export default {
         settings() {
             this.$router.push("/userProfile")
         },
-        async addFriend(email) {
+        async sendFriendRequest(email) {
             if (email != "") {
                 try {
                     const res = await api({
@@ -181,6 +194,51 @@ export default {
                         autoClose: 3000,
                     });
                 }
+            }
+        },
+        async addFriend(email) {
+            if (email != "") {
+                try {
+                    const res = await api({
+                        method: "post",
+                        url: `/users/addFriend`,
+                        data: {
+                            "idUser1": this.idUser,
+                            "email": email,
+                        },
+                    }).catch((error) => {
+                        console.log(error);
+                    });
+                    console.log(res.data)
+                    toast.info(res.data, {
+                        autoClose: 3000,
+                    });
+                } catch (error) {
+                    toast.warn(error.response?.data, {
+                        autoClose: 3000,
+                    });
+                }
+            }
+        },
+        async listFriendRequests() {
+            this.friendsRequestsLabel = !this.friendsRequestsLabel;
+            try {
+                const res = await api({
+                    method: "post",
+                    url: `/users/getFriendRequest`,
+                    data: {
+                        "idUser": this.idUser,
+                    },
+                }).catch((error) => {
+                    console.log(error);
+                });
+                this.friendsRequestsList = res.data;
+                console.log(this.friendsRequestsList)
+
+            } catch (error) {
+                toast.warn(error.response?.data, {
+                    autoClose: 3000,
+                });
             }
         }
     },
@@ -268,6 +326,17 @@ input {
     border-radius: 20px;
     margin: 4px;
     font-size: 15px;
+}
+
+.backgroundFriendsRequests {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: rgb(9, 93, 126);
+    background: linear-gradient(90deg, rgba(9, 93, 126, 1) 0%, rgba(46, 134, 169, 1) 100%);
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0px 3px 1px 1px #abbec6;
+    padding: 10px;
 }
 
 .ColumnFriends {
@@ -399,6 +468,20 @@ input {
     width: 85%;
 }
 
+.buttonListRequestsFriendsAdd {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    background: #2C85A7;
+    font-size: 12px;
+    border: 0;
+    color: white;
+    cursor: pointer;
+    width: 25%;
+}
+
 
 .buttonShare {
     display: flex;
@@ -445,6 +528,17 @@ input {
     margin-top: 10px;
     font-size: 18px;
     font-weight: 600;
+}
+
+.titleRequestsContainer {
+    display: flex;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.friendRequestsContainer {
+    display: flex;
+    margin-top: 10px;
 }
 
 .subTitleContainer {
