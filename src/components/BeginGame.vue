@@ -78,7 +78,8 @@ export default {
         };
     },
     async created() {
-        this.userName = localStorage.getItem('first_name');
+        this.userName = localStorage.getItem('first_name').slice(1).slice(0, -1);
+        //this.lastname = localStorage.getItem('last_name').slice(1).slice(0, -1);
         localStorage.setItem('playGame', true);
         localStorage.setItem('numberAnswersCorrect', 0);
     },

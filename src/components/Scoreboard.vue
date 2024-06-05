@@ -1,5 +1,6 @@
 <template>
-    <div class="titleContainer">Como estão os teus amigos:</div><br>
+    <div class="titleContainer">Desafios</div>
+    <div class="subTitleContainer">Como estão os teus amigos:</div>
     <div class="outsideBox">
         <div class="Column">
             <div class="friendName">Amigo1</div>
@@ -26,16 +27,19 @@
             </div>
         </div>
     </div>
+
     <div class="title">Tabela de Pontos</div>
-    <div class="subtitle">Semanal</div>
-    <div class="scoreboardTable">
-        <div class="scoreboard">
-            <div class="score-row">
-                <div class="position">1</div>
-                <div class="name">John Doe</div>
-                <div class="points">100pts</div>
-            </div>
-            <div class="score-row">
+    <div class="subtitle" v-if="this.userResultsList">Semanal</div>
+    <div class="subtitle" v-if="!this.userResultsList">Adiciona amigos para veres como eles estão esta semana!</div>
+    <div v-if="this.userResultsList">
+        <div class="scoreboardTable">
+            <div class="scoreboard" v-for="friend in this.userResultsList" :key="friend.idUser">
+                <div class="score-row">
+                    <div class="position">{{ friend.position }}º</div>
+                    <div class="name">{{ friend.name }}</div>
+                    <div class="points">{{ friend.weekly_points }}</div>
+                </div>
+                <!--             <div class="score-row">
                 <div class="position">2</div>
                 <div class="name">Jane Smith</div>
                 <div class="points">90pts</div>
@@ -49,17 +53,70 @@
                 <div class="position">4</div>
                 <div class="name">Jane Smith</div>
                 <div class="points">90pts</div>
+            </div> -->
+                <!-- Add more rows as needed -->
             </div>
-            <!-- Add more rows as needed -->
         </div>
-
     </div>
 </template>
 
 <script>
+import api from '../api/api.js'
 /* eslint-disable */
 export default {
-    name: "Scoreboard",
+    name: "Scoreboard", data() {
+        return {
+            idUser: "",
+            email: "",
+            firstname: "",
+            lastname: "",
+            age: "",
+            points: 0,
+            streak: 0,
+            level: 0,
+            userResultsList: 0
+        };
+    },
+    async created() {
+        this.idUser = localStorage.getItem('idUser');
+        this.email = localStorage.getItem('email').slice(1).slice(0, -1);
+        this.firstname = localStorage.getItem('first_name').slice(1).slice(0, -1);
+        this.lastname = localStorage.getItem('last_name').slice(1).slice(0, -1);
+        this.age = localStorage.getItem('age');
+        this.points = JSON.parse(localStorage.getItem("points"));
+        this.streak = JSON.parse(localStorage.getItem("streak"));
+        this.level = JSON.parse(localStorage.getItem("level"));
+
+         try {
+             const res = await api({
+                 method: "post",
+                 url: `/users/getFriendsWeeklyResults`,
+                 data: {
+                     "idUser": this.idUser,
+                 },
+             }).catch((error) => {
+                 console.log(error);
+             });
+             
+            
+             res.data.sort((a, b) => b.weekly_points - a.weekly_points);
+            
+             let i = 0;
+             res.data.forEach(element => {
+                 res.data[i].position = i + 1;
+                 i++;
+             });
+             console.log(res.data)
+             this.userResultsList = res.data;
+             
+         } catch (error) {
+             console.log(error.response?.data)
+         }
+
+    },
+    methods: {
+
+    }
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -78,9 +135,9 @@ export default {
     color: white;
 }
 
-.yourself{
+.yourself {
     background-color: #14967FA3;
-  border-radius: 18px;
+    border-radius: 18px;
 }
 
 .position {
@@ -116,9 +173,14 @@ export default {
     font-weight: 400;
 }
 
+.subTitleContainer {
+    display: flex;
+}
+
 .titleContainer {
     display: flex;
-    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .loginImg {
