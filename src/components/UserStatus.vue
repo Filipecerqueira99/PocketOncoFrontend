@@ -34,8 +34,8 @@
 
     <div class="achievements left">Conquistas</div>
     <div v-for="award in this.awards" :key="award.award_id">
-        <div class="left">{{ award.categoryName }} - {{ award.description }}</div>
-        <div class="outsideBox">
+        <div class="left">{{ award.categoryName }} - {{ award.levelDesc }}</div>
+        <div class="outsideBoxAwards">
             <div class="insideBox" :style="{ width: Math.round(award.current_value * 100 / award.goal) + '%' }">
                 <div class="boxText">{{ Math.round(award.current_value * 100 / award.goal) }}%</div>
             </div>
@@ -103,11 +103,30 @@ export default {
         this.streak = JSON.parse(localStorage.getItem("streak"));
         this.level = JSON.parse(localStorage.getItem("level"));
 
+         //create daily missions if needed
+         //var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+        //console.log(utc);
+         try {
+            const res = await api({
+                method: "post",
+                url: `/missionawards/createDailyMissions`,
+                data: {
+                    "idUser": this.idUser,
+                },
+            }).catch((error) => {
+                console.log(error);
+            });
+            console.log(res.data)
+
+        } catch (error) {
+            console.log(error.response?.data)
+        }
+
         //getDailyMissions
         try {
             const res = await api({
                 method: "post",
-                url: `/users/getDailyMissions`,
+                url: `/missionawards/getDailyMissions`,
                 data: {
                     "idUser": this.idUser,
                 },
@@ -126,7 +145,7 @@ export default {
         try {
             const res = await api({
                 method: "post",
-                url: `/users/getUserAwards`,
+                url: `/missionawards/getUserAwards`,
                 data: {
                     "idUser": this.idUser,
                 },
@@ -165,6 +184,12 @@ export default {
 
 .outsideBox {
     margin-top: 10px;
+    background: #095D7E;
+    border-radius: 20px;
+}
+
+.outsideBoxAwards{
+    margin-bottom: 10px;
     background: #095D7E;
     border-radius: 20px;
 }

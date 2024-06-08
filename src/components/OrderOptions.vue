@@ -20,7 +20,7 @@
 		</div>
 		<button class="buttonHelp" @click.prevent="finishGame()">Concluir</button><br>
 		<button class="buttonHelp" @click.prevent="help()">{{ this.showHideHelp }}</button><br><br>
-		
+
 		<div class="blockExplanation" v-if="this.showTip">
 			{{ this.tip }}
 		</div>
@@ -52,7 +52,6 @@
 	<div class="outsideBorder">
 		<div class="insideBar" :style="{ width: this.progress }"></div>
 	</div>
-
 </template>
 
 <script>
@@ -226,6 +225,16 @@ export default {
 				&& this.lineD == this.orderedD) {
 				this.userGotItRight = true;
 				localStorage.setItem('numberAnswersCorrect', (parseInt(localStorage.getItem('numberAnswersCorrect')) + 1));
+
+				//adicionar ponto a categoria que acertou
+				var answerCategoryCounter = JSON.parse(localStorage.getItem('answerCategoryCounter'));
+				var data = JSON.parse(localStorage.getItem('questions'));
+				var numberQuestion = JSON.parse(localStorage.getItem('numberQuestion'));
+				var question = data[numberQuestion - 1];
+				answerCategoryCounter[question.category_id] = answerCategoryCounter[question.category_id] + 1;
+				console.log(answerCategoryCounter)
+				localStorage.setItem('answerCategoryCounter', JSON.stringify(answerCategoryCounter));
+
 			} else {
 				this.userGotItRight = false;
 			}

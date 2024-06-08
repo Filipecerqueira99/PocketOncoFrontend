@@ -53,7 +53,7 @@ export default {
         };
     },
     async created() {
-        this.userName = localStorage.getItem('first_name');
+        this.userName = localStorage.getItem('first_name').slice(1).slice(0, -1);
         this.numberAnswersCorrect = parseInt(localStorage.getItem('numberAnswersCorrect'));
 
         var idUser = parseInt(localStorage.getItem('idUser'));
@@ -87,6 +87,87 @@ export default {
         toast.info(texto, {
             autoClose: 3000,
         });
+
+
+        var category_id = parseInt(localStorage.getItem('tematicGame'));
+        console.log(category_id)
+        if (category_id != 0) {
+            try {
+                const res = await api({
+                    method: "post",
+                    url: `/missionawards/updateDailyMission`,
+                    data: {
+                        "idUser": idUser,
+                        "category_id": category_id,
+                    },
+                }).catch((error) => {
+                    console.log(error);
+                });
+                console.log(res.data)
+                toast.info(res.data, {
+                    autoClose: 3000,
+                });
+
+            } catch (error) {
+                console.log(error.response?.data)
+            }
+        }
+
+        //adicionar numero de respostas corretas para cada categoria que acertou perguntas
+        var answerCategoryCounter = JSON.parse(localStorage.getItem('answerCategoryCounter'));
+        console.log(answerCategoryCounter);
+
+        for (const property in answerCategoryCounter) {
+            console.log(`${property}`);
+            console.log(`${answerCategoryCounter[property]}`);
+
+            try {
+                const res = await api({
+                    method: "post",
+                    url: `/missionawards/updateUserAwards`,
+                    data: {
+                        "idUser": idUser,
+                        "category_id": parseInt(`${property}`),
+                        "points": parseInt(`${answerCategoryCounter[property]}`),
+                    },
+                }).catch((error) => {
+                    console.log(error);
+                });
+                console.log(res.data)
+                /* toast.info(res.data, {
+                    autoClose: 3000,
+                }); */
+
+            } catch (error) {
+                console.log(error.response?.data)
+            }
+        }
+
+        /* try {
+            const res = await api({
+                method: "post",
+                url: `/missionawards/updateDailyMission`,
+                data: {
+                    "idUser": idUser,
+                    "category_id": category_id,
+                },
+            }).catch((error) => {
+                console.log(error);
+            });
+            console.log(res.data)
+            toast.info(res.data, {
+                autoClose: 3000,
+            });
+
+        } catch (error) {
+            console.log(error.response?.data)
+        } */
+
+
+
+        //resetar caso tenha sido jogo tematico
+        localStorage.setItem('tematicGame', 0);
+
     },
     methods: {
         goBack() {

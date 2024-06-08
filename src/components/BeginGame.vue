@@ -88,14 +88,28 @@ export default {
         //this.lastname = localStorage.getItem('last_name').slice(1).slice(0, -1);
         localStorage.setItem('playGame', true);
         localStorage.setItem('numberAnswersCorrect', 0);
+        let answerCounter = {
+            "1": 0,//"Dor": 0,
+            "2": 0,//"Dispneia": 0,
+            "3": 0,//"Insónia": 0,
+            "4": 0,//"Fadiga": 0,
+            "5": 0,//"Ansiedade": 0,
+            "6": 0,//"Anorexia": 0,
+            "7": 0,//"Diarreia": 0,
+            "8": 0,//"Obstipação": 0,
+            "9": 0,//"Vómitos": 0,
+        }
+        localStorage.setItem('answerCategoryCounter', JSON.stringify(answerCounter));
+        
     },
     methods: {
         async startGame() {
             var category_id = parseInt(localStorage.getItem('tematicGame'));
-            
+            console.log(category_id)
+
             if (category_id > 0) {
                 console.log("tematico")
-                localStorage.setItem('tematicGame', 0);
+                
                 const response = await api({
                     method: 'get',
                     url: `questions/getFiveRandomQuestionsFromCategory/${category_id}`,

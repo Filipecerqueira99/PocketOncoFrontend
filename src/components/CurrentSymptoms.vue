@@ -8,35 +8,35 @@
    <h4>Selecione o que lhe preocupa mais hoje</h4>
    <div class="outsideBox">
     <div class="threelineBox">
-        <button class="buttonNav selected" @click.prevent="Login()">Dor<br>
+        <button class="buttonNav " @click.prevent="addToSymptomList(1)">Dor<br>
             <img class="iconImg" src="../assets/symptoms/Dor.png" alt="Dor" />
         </button>
-        <button class="buttonNav" @click.prevent="Login()">Dispneia
+        <button class="buttonNav" @click.prevent="addToSymptomList(2)">Dispneia
             <img class="iconImg" src="../assets/symptoms/Dispneia.png" alt="Dispneia" />
         </button>
-        <button class="buttonNav" @click.prevent="Login()">Insónia
+        <button class="buttonNav" @click.prevent="addToSymptomList(3)">Insónia
             <img class="iconImg" src="../assets/symptoms/Insonia.png" alt="Insonia" />
         </button>
     </div>
     <div class="threelineBox">
-        <button class="buttonNav selected" @click.prevent="Login()">Fadiga
+        <button class="buttonNav " @click.prevent="addToSymptomList(4)">Fadiga
             <img class="iconImg" src="../assets/symptoms/Fadiga.png" alt="Fadiga" />
         </button>
-        <button class="buttonNav" @click.prevent="Login()">Ansiedade
+        <button class="buttonNav" @click.prevent="addToSymptomList(5)">Ansiedade
             <img class="iconImg" src="../assets/symptoms/Ansiedade.png" alt="Ansiedade" />
         </button>
-        <button class="buttonNav" @click.prevent="Login()">Anorexia
+        <button class="buttonNav" @click.prevent="addToSymptomList(6)">Anorexia
             <img class="iconImg" src="../assets/symptoms/Anorexia.png" alt="Anorexia" />
         </button>
     </div>
     <div class="threelineBox">
-        <button class="buttonNav" @click.prevent="Login()">Diarreia
+        <button class="buttonNav" @click.prevent="addToSymptomList(7)">Diarreia
             <img class="iconImg" src="../assets/symptoms/Diarreia.png" alt="Diarreia" />
         </button>
-        <button class="buttonNav selected" @click.prevent="Login()">Obstipação
+        <button class="buttonNav " @click.prevent="addToSymptomList(8)">Obstipação
             <img class="iconImg" src="../assets/symptoms/Obstipação.png" alt="Obstipação" />
         </button>
-        <button class="buttonNav selected" @click.prevent="Login()">Vómitos
+        <button class="buttonNav selected" @click.prevent="addToSymptomList(9)">Vómitos
             <img class="iconImg" src="../assets/symptoms/Vómitos.png" alt="Vómitos" />
         </button>
     </div>

@@ -59,7 +59,7 @@ export default {
 		var data = JSON.parse(localStorage.getItem('questions'));
 		console.log(data)
 		var numberQuestion = JSON.parse(localStorage.getItem('numberQuestion'));
-		if(numberQuestion > "5"){
+		if (numberQuestion > "5") {
 			this.$router.push("/main2");
 		}
 		console.log(data[numberQuestion - 1]);
@@ -84,6 +84,16 @@ export default {
 				this.showExplanation = true;
 				this.userGotItRight = true;
 				localStorage.setItem('numberAnswersCorrect', (parseInt(localStorage.getItem('numberAnswersCorrect')) + 1));
+
+				//adicionar ponto a categoria que acertou
+				var answerCategoryCounter = JSON.parse(localStorage.getItem('answerCategoryCounter'));
+				var data = JSON.parse(localStorage.getItem('questions'));
+				var numberQuestion = JSON.parse(localStorage.getItem('numberQuestion'));
+				var question = data[numberQuestion - 1];
+				answerCategoryCounter[question.category_id] = answerCategoryCounter[question.category_id] + 1;
+				console.log(answerCategoryCounter)
+				localStorage.setItem('answerCategoryCounter', JSON.stringify(answerCategoryCounter));
+
 			} else {
 				this.showExplanation = true;
 				this.userGotItRight = false;
@@ -109,9 +119,9 @@ export default {
 			var data = JSON.parse(localStorage.getItem('questions'));
 			var numberQuestion = JSON.parse(localStorage.getItem('numberQuestion'));
 			var question = data[numberQuestion - 1];
-			if(question != undefined){
+			if (question != undefined) {
 				this.gameModeChooser(question.type_id)
-			}else{
+			} else {
 				this.$router.push("/endGame")
 			}
 		},

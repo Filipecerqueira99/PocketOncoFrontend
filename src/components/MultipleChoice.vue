@@ -114,23 +114,23 @@ export default {
 
 			if (this.selectedAnswer == this.correctLine) {
 				this.userGotItRight = true;
+				
+				//adicionar ponto a categoria que acertou
+				var answerCategoryCounter = JSON.parse(localStorage.getItem('answerCategoryCounter'));
+				var data = JSON.parse(localStorage.getItem('questions'));
+				var numberQuestion = JSON.parse(localStorage.getItem('numberQuestion'));
+				var question = data[numberQuestion - 1];
+				answerCategoryCounter[question.category_id] = answerCategoryCounter[question.category_id] + 1;
+				console.log(answerCategoryCounter)
+				localStorage.setItem('answerCategoryCounter', JSON.stringify(answerCategoryCounter));
+
+
 				localStorage.setItem('numberAnswersCorrect', (parseInt(localStorage.getItem('numberAnswersCorrect')) + 1));
 
 			} else {
 				this.userGotItRight = false;
 			}
 
-
-			/* console.log(this.answer)
-			console.log(this.correctAnswer)
-			if (this.answer == this.correctAnswer) {
-			  this.showExplanation = true;
-			  this.userGotItRight = true;
-			  localStorage.setItem('numberAnswersCorrect', (parseInt(localStorage.getItem('numberAnswersCorrect')) + 1));
-			} else {
-			  this.showExplanation = true;
-			  this.userGotItRight = false;
-			} */
 		},
 		action(number) {
 			this.selectedAnswer = number;
