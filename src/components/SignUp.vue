@@ -12,7 +12,7 @@
     <input type="password" v-model="password2" placeholder="" /><br />
     Primeiro Nome<br>
     <input type="text" v-model="firstname" placeholder="" /><br />
-    Segiundo Nome<br>
+    Segundo Nome<br>
     <input type="text" v-model="lastname" placeholder="" /><br />
     Idade<br>
     <input type="text" v-model="age" placeholder="" /><br />
