@@ -12,7 +12,7 @@
     Ainda não tem conta?
     <button class="buttonRegister" @click.prevent="signup()">Registe-se</button>
   </div>
-  <div class="mytextdiv">
+  <!-- <div class="mytextdiv">
     <div class="divider"></div>
     <div class="mytexttitle">
       OU
@@ -24,8 +24,8 @@
     <button class="buttonGoogle" @click.prevent="Login(this.email, this.password)">
       <img class="googleImg" src="../assets/google.png" alt="Folder" />
       Login com Google
-    </button>
-  </div>
+    </button> 
+  </div>-->
   <div :class="this.formSent ? 'success' : 'failure'">
     <p>{{ this.showMessage }}</p>
   </div>

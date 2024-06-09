@@ -112,7 +112,7 @@
 
 
 
-    <div class="titleContainer">Progresso Semanal</div>
+    <!-- <div class="titleContainer">Progresso Semanal</div>
 
     <table>
         <tr>
@@ -138,7 +138,7 @@
         </tr>
     </table>
 
-    <div class="subTitleContainer">Parabéns! Continua com este ritmo!</div>
+    <div class="subTitleContainer">Parabéns! Continua com este ritmo!</div> -->
 
     <div class="buttonOnRight">
         <button class="buttonNext" @click.prevent="settings()"><img class="iconImg" src="../assets/icons/setting.png"
