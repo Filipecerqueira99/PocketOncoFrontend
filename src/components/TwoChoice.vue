@@ -1,11 +1,11 @@
 <template>
-	<h2>É verdade que a quimioterapia é usada recorrentemente na luta contra o cancro?</h2>
+	<h2>{{ this.description }}</h2>
 	<div v-if="this.userGotItRight == true" class="answerCorrect">Correto! Ótimo trabalho! 🎉</div>
 	<div v-if="this.userGotItRight == false" class="answerWrong">Mesmo que não tenhas acertado desta vez, estás no
 		caminho certo! Continua a tentar, estás a aprender! 🌟</div>
 
 	<div class="multipleChoice" v-if="!this.showExplanation">
-		Escolhe a opção correta<br>
+		<!-- Escolhe a opção correta<br> -->
 		<button class="buttonAnswer correct" :style="{ border: isSelected == true ? '3px solid black' : '' }"
 			@click.prevent="changeTrueOrFalse(true)">Verdadeiro</button><br>
 		<button class="buttonAnswer wrong" :style="{ border: isSelected == false ? '3px solid black' : '' }"
@@ -45,6 +45,7 @@ export default {
 			isSelected: null,
 			showHideHelp: "Ajuda",
 			showExplanation: false,
+			description: "",
 			tip: "",
 			explanation: "",
 			showTip: false,
@@ -65,7 +66,9 @@ export default {
 		console.log(data[numberQuestion - 1]);
 		var question = data[numberQuestion - 1];
 		this.tip = question.tip;
+		this.description = question.description;
 		this.explanation = question.explanation;
+		// na base de dados 1 == true e 0 == false
 		if (question.correctAnswer == 1) {
 			this.correctAnswer = true;
 		} else {

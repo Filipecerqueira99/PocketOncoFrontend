@@ -1,7 +1,7 @@
 <template>
 
 	<h2>{{ this.questionDescription }}</h2>
-	<div v-if="!this.hasPlayed">Escolhe a opção correta<br></div>
+	<!-- <div v-if="!this.hasPlayed">Escolhe a opção correta<br></div> -->
 	<div v-if="this.userGotItRight == true" class="answerCorrect">Correto! Ótimo trabalho! 🎉</div>
 	<div v-if="this.userGotItRight == false" class="answerWrong">Mesmo que não tenhas acertado desta vez, estás no
 		caminho certo! Continua a tentar, estás a aprender! 🌟</div>
