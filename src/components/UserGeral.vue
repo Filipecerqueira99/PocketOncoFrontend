@@ -3,7 +3,7 @@
         <div class="Column1">
             <div class="left">
                 <div class="titleContainer">{{ this.firstname + " " + this.lastname }}</div>
-                <div class="subTitleContainer">Registado desde aaaaaaaaaa</div>
+                <div class="subTitleContainer">Registado desde 2024</div>
             </div>
             <div class="twoButtons">
                 <button class="buttonAddFriends" @click.prevent="addFriendsLabel = !addFriendsLabel"><img
