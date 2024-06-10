@@ -40,7 +40,24 @@
             <img class="tutorialImg" src="../assets/4.png" alt="Escolha" />
             <div class="alignLeft">
                 <ol>
-                    <li>Início do Jogo: O jogo começa com uma pergunta ou situação apresentada na tela.</li>
+                    <li>Início do Jogo: O jogo começa com uma afirmação ou frase apresentada na tela.</li>
+                    <li>Opções de Resposta: Abaixo da afirmação, haverá duas opções de resposta: "Verdadeiro" e "Falso".
+                    </li>
+                    <li> Escolha uma Opção: Leia a afirmação cuidadosamente e selecione se você acha que ela é verdadeira ou
+                        falsa. Isso pode ser feito clicando na opção desejada ou tocando na tela, dependendo do dispositivo.
+                    </li>
+                    <li>Confirmar Resposta: Em alguns jogos, após escolher uma opção, você pode precisar confirmar sua
+                        resposta clicando em um botão "Confirmar" ou "Enviar".</li>
+
+                    <li>Receber Feedback: O jogo irá informar se a sua escolha está correta ou errada. Muitas vezes, uma
+                        explicação adicional ou a resposta correta será exibida. </li>
+                    <li>Próxima Afirmação: Após receber o feedback, você será levado à próxima afirmação e o processo se
+                        repete.
+                    </li>
+                    <!-- <li>
+                        Pontuação e Resultado: No final do jogo, sua pontuação será calculada com base no número de
+                        respostas corretas. Você pode ver seu desempenho e, em alguns jogos, comparar com outros jogadores.
+                    </li> -->
                 </ol>
             </div>
         </div>
@@ -50,12 +67,18 @@
             <img class="tutorialImg" src="../assets/3.png" alt="Escolha" />
             <div class="alignLeft">
                 <ol>
-                    <li>Início do Jogo: O jogo começa com uma pergunta ou situação apresentada na tela.</li>
+                    <li>Início do Jogo: O jogo começa com uma lista de itens ou declarações apresentados na tela, desordenados.</li>
+                    <li>Objetivo: Seu objetivo é reorganizar os itens em ordem de importância, colocando o mais importante no topo e o menos importante na parte inferior.</li>
+                    <li>Reorganizar Itens: Para reorganizar, você deve clicar no item que pretende alterar posição com o item que está na posição desejada.</li>
+                    <li>Confirmar Ordem: Após organizar os itens na ordem desejada, você pode precisar confirmar sua escolha clicando em um botão "Confirmar" ou "Enviar".</li>
+                    <li>Receber Feedback: O jogo irá comparar sua ordem com a ordem correta e informar o quão bem você se saiu. Muitas vezes, uma explicação adicional será fornecida.</li>
+
+
                 </ol>
             </div>
         </div>
 
-        <div class="boxTutorial">
+        <!-- <div class="boxTutorial">
             <div class="tituloTutorial">Alínea Correta</div>
             <img class="tutorialImg" src="../assets/2.png" alt="Escolha" />
             <div class="alignLeft">
@@ -63,7 +86,7 @@
                     <li>Início do Jogo: O jogo começa com uma pergunta ou situação apresentada na tela.</li>
                 </ol>
             </div>
-        </div>
+        </div> -->
 
     </div>
 
@@ -100,7 +123,7 @@ export default {
             "9": 0,//"Vómitos": 0,
         }
         localStorage.setItem('answerCategoryCounter', JSON.stringify(answerCounter));
-        
+
     },
     methods: {
         async startGame() {
@@ -109,7 +132,7 @@ export default {
 
             if (category_id > 0) {
                 console.log("tematico")
-                
+
                 const response = await api({
                     method: 'get',
                     url: `questions/getFiveRandomQuestionsFromCategory/${category_id}`,
@@ -244,5 +267,4 @@ export default {
     color: black;
     width: 90%;
     margin-left: 5px;
-}
-</style>
+}</style>
