@@ -89,6 +89,10 @@ export default {
         this.level = JSON.parse(localStorage.getItem("level"));
         localStorage.setItem('tematicGame', 0);
         localStorage.setItem('playGame', false);
+        let userId = JSON.parse(localStorage.getItem("idUser"));
+        if (!userId){
+            this.$router.push("/login")
+        }
     },
     methods: {
         dailyGame() {
