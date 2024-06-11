@@ -140,11 +140,17 @@
 
     <div class="subTitleContainer">Parabéns! Continua com este ritmo!</div> -->
 
+<div class="twoButtons">
+    <div class="buttonOnLeft">
+        <button class="buttonNext" @click.prevent="symptoms()"><img class="iconImg" src="../assets/icons/setting.png"
+                alt="setting" /> Sintomas</button>
+    </div>
+
     <div class="buttonOnRight">
         <button class="buttonNext" @click.prevent="settings()"><img class="iconImg" src="../assets/icons/setting.png"
                 alt="setting" /> Definições</button>
     </div>
-
+</div>
     <div>
         &nbsp;<br>
         &nbsp;<br>
@@ -212,6 +218,9 @@ export default {
     methods: {
         settings() {
             this.$router.push("/userProfile")
+        },
+        symptoms(){
+            this.$router.push("/currentSymptoms")
         },
         async sendFriendRequest(email) {
             if (email != "") {
@@ -342,8 +351,17 @@ input {
     margin-left: 5px;
 }
 
+.twoButtons{
+    display: flex;
+}
+
+.buttonOnLeft{
+    text-align: left;
+}
+
 .buttonOnRight {
     text-align: right;
+    margin-left: 35%;
     margin-bottom: 200px
 }
 
@@ -360,7 +378,7 @@ input {
     border: 0;
     color: white;
     cursor: pointer;
-    width: 40%;
+    width: 90%;
 }
 
 .lineTD {
