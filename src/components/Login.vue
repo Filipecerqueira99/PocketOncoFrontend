@@ -60,7 +60,9 @@ export default {
               "password": password
             }
           })
+          console.log(response)
           if (response.data && response.data.accessToken !== " ") {
+            var firstLoginOfTheDay = false;
             localStorage.setItem('email', JSON.stringify(response.data.email));
             localStorage.setItem('first_name', JSON.stringify(response.data.first_name));
             localStorage.setItem('last_name', JSON.stringify(response.data.last_name));
@@ -71,6 +73,7 @@ export default {
             localStorage.setItem('points', JSON.stringify(response.data.points));
             localStorage.setItem('streak', JSON.stringify(response.data.streak));
             localStorage.setItem('level', JSON.stringify(response.data.level));
+            localStorage.setItem('today', JSON.stringify(response.data.today));
             localStorage.setItem('img', JSON.stringify(response.data.img));
 
             //adicionar awards caso não existam
@@ -89,8 +92,39 @@ export default {
               console.log(error.response?.data)
             }
 
+            //adicionar streak e ir para a página de sintomas caso seja o primeiro login
+            var now = new Date();
+            var day = now.getDate();
+            if (day > response.data.today) {
+              try {
+                const res = await api({
+                  method: "post",
+                  url: `/users/updateStreakAndToday`,
+                  data: {
+                    "idUser": response.data.idUser,
+                    "streak": parseInt(response.data.streak) + 1,
+                    "today": day,
+                  },
+                }).catch((error) => {
+                  console.log(error);
+                });
+                firstLoginOfTheDay = true;
+                localStorage.setItem('today', day);
+                console.log(res.data)
+              } catch (error) {
+                console.log(error.response?.data)
+              }
+            }
+
+
+
             console.log(response.data)
-            this.$router.push("/main2")
+            if (firstLoginOfTheDay) {
+              this.$router.push("/currentSymptoms")
+            } else {
+              this.$router.push("/main2")
+            }
+
             this.showMessage = "login successful"
             this.formSent = true
           } else {
@@ -98,7 +132,7 @@ export default {
             this.showMessage = response.data.message
           }
         } catch (error) {
-          this.showMessage = error.response.data
+          console.log(error.response.data)
           this.formSent = false
         }
       }
@@ -230,4 +264,5 @@ input {
   flex-grow: 1;
   height: 1px;
   background-color: #9f9f9f;
-}</style>
+}
+</style>

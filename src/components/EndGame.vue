@@ -53,6 +53,10 @@ export default {
         };
     },
     async created() {
+        let userId = JSON.parse(localStorage.getItem("idUser"));
+        if (!userId){
+            this.$router.push("/login")
+        }
         this.userName = localStorage.getItem('first_name').slice(1).slice(0, -1);
         this.numberAnswersCorrect = parseInt(localStorage.getItem('numberAnswersCorrect'));
 

@@ -107,6 +107,11 @@ export default {
         };
     },
     async created() {
+        let userId = JSON.parse(localStorage.getItem("idUser"));
+        if (!userId){
+            this.$router.push("/login")
+        }
+        
         this.userName = localStorage.getItem('first_name').slice(1).slice(0, -1);
         //this.lastname = localStorage.getItem('last_name').slice(1).slice(0, -1);
         localStorage.setItem('playGame', true);

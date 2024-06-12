@@ -84,14 +84,39 @@ export default {
         };
     },
     async created() {
-        this.points = JSON.parse(localStorage.getItem("points"));
-        this.streak = JSON.parse(localStorage.getItem("streak"));
-        this.level = JSON.parse(localStorage.getItem("level"));
-        localStorage.setItem('tematicGame', 0);
-        localStorage.setItem('playGame', false);
         let userId = JSON.parse(localStorage.getItem("idUser"));
-        if (!userId){
+        if (!userId) {
             this.$router.push("/login")
+        } else {
+            this.points = JSON.parse(localStorage.getItem("points"));
+            this.streak = JSON.parse(localStorage.getItem("streak"));
+            this.level = JSON.parse(localStorage.getItem("level"));
+            localStorage.setItem('tematicGame', 0);
+            localStorage.setItem('playGame', false);
+
+            //adicionar streak e ir para a página de sintomas caso seja o primeiro login
+            var now = new Date();
+            var day = now.getDate();
+            if (day > parseInt(JSON.parse(localStorage.getItem("points")))) {
+                try {
+                    const res = await api({
+                        method: "post",
+                        url: `/users/updateStreakAndToday`,
+                        data: {
+                            "idUser": userId,
+                            "streak": parseInt(JSON.parse(localStorage.getItem("streak"))) + 1,
+                            "today": day,
+                        },
+                    }).catch((error) => {
+                        console.log(error);
+                    });
+                    localStorage.setItem('today', day);
+                    this.$router.push("/currentSymptoms")
+                    console.log(res.data)
+                } catch (error) {
+                    console.log(error.response?.data)
+                }
+            }
         }
     },
     methods: {

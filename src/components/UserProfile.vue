@@ -55,6 +55,9 @@ export default {
     },
     async created() {
         this.idUser = localStorage.getItem('idUser');
+        if (!idUser){
+            this.$router.push("/login")
+        }
         this.email = localStorage.getItem('email').slice(1).slice(0, -1);
         this.firstname = localStorage.getItem('first_name').slice(1).slice(0, -1);
         this.lastname = localStorage.getItem('last_name').slice(1).slice(0, -1);
