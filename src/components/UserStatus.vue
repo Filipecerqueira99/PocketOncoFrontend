@@ -95,7 +95,7 @@ export default {
     },
     async created() {
         this.idUser = localStorage.getItem('idUser');
-        if (!idUser){
+        if (!this.idUser){
             this.$router.push("/login")
         }
         this.email = localStorage.getItem('email').slice(1).slice(0, -1);
