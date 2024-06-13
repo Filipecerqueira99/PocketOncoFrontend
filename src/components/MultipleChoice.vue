@@ -7,15 +7,15 @@
 		caminho certo! Continua a tentar, estás a aprender! 🌟</div>
 
 	<div class="multipleChoice" v-if="!this.hasPlayed">
-		<button class="buttonAnswer" :style="{ border: isSelected == '1' ? '3px solid black' : '' }"
+		<button class="buttonAnswer" :style="{ border: isSelected == '1' ? '5px solid #095D7E' : '' }"
 			@click.prevent="action(1)">{{ this.lineA }}</button><br>
-		<button class="buttonAnswer" :style="{ border: isSelected == '2' ? '3px solid black' : '' }"
+		<button class="buttonAnswer" :style="{ border: isSelected == '2' ? '5px solid #095D7E' : '' }"
 			@click.prevent="action(2)">{{ this.lineB }}</button><br>
-		<button class="buttonAnswer" :style="{ border: isSelected == '3' ? '3px solid black' : '' }"
+		<button class="buttonAnswer" :style="{ border: isSelected == '3' ? '5px solid #095D7E' : '' }"
 			@click.prevent="action(3)">{{ this.lineC }}</button><br>
-		<button class="buttonAnswer" :style="{ border: isSelected == '4' ? '3px solid black' : '' }"
+		<button class="buttonAnswer" :style="{ border: isSelected == '4' ? '5px solid #095D7E' : '' }"
 			@click.prevent="action(4)">{{ this.lineD }}</button><br>
-		<button class="buttonHelp" @click.prevent="finishGame()">Escolher</button><br>
+		<button class="buttonVerify" @click.prevent="finishGame()">Verificar</button><br>
 		<button class="buttonHelp" @click.prevent="help()">{{ this.showHideHelp }}</button><br><br>
 		<div class="blockExplanation" v-if="this.showTip">
 			{{ this.tip }}
@@ -28,7 +28,7 @@
 		<div class="blockExplanation">
 			{{ this.explanation }}
 		</div>
-		<button class="buttonHelp" @click.prevent="nextGame()">Seguinte</button>
+		<button class="buttonNextQuestion" @click.prevent="nextGame()">Seguinte</button>
 	</div>
 
 	<!-- <button class="buttonHelp" @click.prevent="Login(this.email, this.password)">Seguinte</button><br> -->
@@ -36,6 +36,12 @@
 	<div class="outsideBorder">
 		<div class="insideBar" :style="{ width: this.progress }"></div>
 	</div>
+
+	<div>
+        &nbsp;<br>
+        &nbsp;<br>
+        &nbsp;<br>
+    </div>
 </template>
 
 <script>
@@ -183,15 +189,15 @@ export default {
 }
 
 .buttonAnswer {
-	margin-top: 30px;
+	margin-top: 10px;
 	padding: 10px;
 	border-radius: 22px;
 	background-color: #BDECFF;
 	border: 0;
 	color: black;
 	cursor: pointer;
-	width: 90%;
-	height: 60px;
+	width: 95%;
+	height: 100px;
 }
 
 .correct {
@@ -231,6 +237,33 @@ export default {
 	cursor: pointer;
 	width: 35%;
 }
+
+.buttonNextQuestion{
+	padding: 10px;
+	border-radius: 22px;
+	background-color: #14967F;
+	border: 0;
+	color: white;
+	cursor: pointer;
+	width: 40%;
+	font-size: 18px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+
+.buttonVerify {
+	padding: 10px;
+	border-radius: 22px;
+	background-color: #14967F;
+	border: 0;
+	color: white;
+	cursor: pointer;
+	width: 40%;
+	font-size: 18px;
+	margin-top: 15px;
+}
+
 
 .answerCorrect {
 	color: #5fcf77;

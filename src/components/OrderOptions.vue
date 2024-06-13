@@ -1,9 +1,7 @@
 <template>
 	<h2>{{ this.questionDescription }}</h2>
 	<div v-if="!this.hasPlayed">Ordena do mais importante para o menos<br></div>
-	<div v-if="this.userGotItRight == true" class="answerCorrect">Correto! Ótimo trabalho! 🎉</div>
-	<div v-if="this.userGotItRight == false" class="answerWrong">Mesmo que não tenhas acertado desta vez, estás no
-		caminho certo! Continua a tentar, estás a aprender! 🌟</div>
+
 
 	<div class="orderChoice" v-if="!this.hasPlayed">
 		<div class="container">
@@ -31,7 +29,7 @@
 		</div>
 
 
-		<button class="buttonHelp" @click.prevent="finishGame()">Concluir</button><br>
+		<button class="buttonVerify" @click.prevent="finishGame()">Verificar</button><br>
 		<button class="buttonHelp" @click.prevent="help()">{{ this.showHideHelp }}</button><br><br>
 
 		<div class="blockExplanation" v-if="this.showTip">
@@ -52,19 +50,28 @@
 			</div>
 			<div class="bottom">Menos importante</div>
 		</div>
+		<div v-if="this.userGotItRight == true" class="answerCorrect">Correto! Ótimo trabalho! 🎉</div>
+		<div v-if="this.userGotItRight == false" class="answerWrong">Mesmo que não tenhas acertado desta vez, estás no
+			caminho certo! Continua a tentar, estás a aprender! 🌟</div>
 		<div>
-			Explicação
+			<div class="tittleExplanation">Explicação</div>
 			<div class="blockExplanation">
 				{{ this.explanation }}
 			</div>
 		</div>
-		<button class="buttonNext" @click.prevent="nextGame()">Seguinte</button><br>
+		<button class="buttonNextQuestion" @click.prevent="nextGame()">Seguinte</button><br>
 	</div>
 
 	Progresso
 	<div class="outsideBorder">
 		<div class="insideBar" :style="{ width: this.progress }"></div>
 	</div>
+
+	<div>
+        &nbsp;<br>
+        &nbsp;<br>
+        &nbsp;<br>
+    </div>
 </template>
 
 <script>
@@ -473,13 +480,19 @@ export default {
 
 .blockExplanation {
 	text-align: left;
-	font-size: 12px;
+	font-size: 14px;
 	padding: 10px;
 	border-radius: 22px;
 	background-color: #BDECFF;
 	border: 0;
 	color: #222222;
 	width: 90%;
+}
+
+.tittleExplanation {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	font-size: 16px;
 }
 
 
@@ -492,6 +505,32 @@ export default {
 	color: white;
 	cursor: pointer;
 	width: 30%;
+}
+
+.buttonNextQuestion{
+	padding: 10px;
+	border-radius: 22px;
+	background-color: #14967F;
+	border: 0;
+	color: white;
+	cursor: pointer;
+	width: 40%;
+	font-size: 18px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+
+.buttonVerify {
+	padding: 10px;
+	border-radius: 22px;
+	background-color: #14967F;
+	border: 0;
+	color: white;
+	cursor: pointer;
+	width: 40%;
+	font-size: 18px;
+	margin-top: 15px;
 }
 
 .buttonNext {
@@ -507,19 +546,21 @@ export default {
 }
 
 .answerCorrect {
+	margin-top: 20px;
 	color: #5fcf77;
 	font-size: 18px;
 	font-weight: 600;
-	border: 3px solid #7dc78d;
+	/* border: 3px solid #7dc78d; */
 	border-radius: 30px;
 	margin-bottom: 10px;
 }
 
 .answerWrong {
+	margin-top: 20px;
 	color: #E84558;
 	font-size: 18px;
 	font-weight: 600;
-	border: 3px solid #FFB0B0;
+	/* border: 3px solid #FFB0B0; */
 	border-radius: 30px;
 	margin-bottom: 10px;
 }

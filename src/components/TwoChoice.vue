@@ -1,17 +1,15 @@
 <template>
 	<h2>{{ this.description }}</h2>
-	<div v-if="this.userGotItRight == true" class="answerCorrect">Correto! Ótimo trabalho! 🎉</div>
-	<div v-if="this.userGotItRight == false" class="answerWrong">Mesmo que não tenhas acertado desta vez, estás no
-		caminho certo! Continua a tentar, estás a aprender! 🌟</div>
+	
 
 	<div class="multipleChoice" v-if="!this.showExplanation">
 		<!-- Escolhe a opção correta<br> -->
-		<button class="buttonAnswer correct" :style="{ border: isSelected == true ? '3px solid black' : '' }"
+		<button class="buttonAnswer correct" :style="{ border: isSelected == true ? '5px solid #095D7E' : '' }"
 			@click.prevent="changeTrueOrFalse(true)">Verdadeiro</button><br>
-		<button class="buttonAnswer wrong" :style="{ border: isSelected == false ? '3px solid black' : '' }"
+		<button class="buttonAnswer wrong" :style="{ border: isSelected == false ? '5px solid #095D7E' : '' }"
 			@click.prevent="changeTrueOrFalse(false)">Falso</button><br>
 
-		<button class="buttonHelp" @click.prevent="finishGame()">Selecionar</button><br>
+		<button class="buttonVerify" @click.prevent="finishGame()">Verificar</button><br>
 		<button class="buttonHelp" @click.prevent="help()">{{ this.showHideHelp }}</button><br><br>
 		<div class="blockExplanation" v-if="this.showTip">
 			{{ this.tip }}
@@ -19,14 +17,18 @@
 	</div>
 
 	<div class="explanation" v-if="this.showExplanation">
-		<button v-if="this.correctAnswer" class="buttonAnswer correctAnswerGreen">Verdadeiro</button><br>
-		<button v-if="!this.correctAnswer" class="buttonAnswer correctAnswerRed">Falso</button><br>
+		<button v-if="this.correctAnswer" class="buttonAnswer correct">Verdadeiro</button><br>
+		<button v-if="!this.correctAnswer" class="buttonAnswer wrong">Falso</button><br>
+
+		<div v-if="this.userGotItRight == true" class="answerCorrect">Correto! Ótimo trabalho! 🎉</div>
+	<div v-if="this.userGotItRight == false" class="answerWrong">Mesmo que não tenhas acertado desta vez, estás no
+		caminho certo! Continua a tentar, estás a aprender! 🌟</div>
 
 		<div class="tittleExplanation">Explicação</div>
 		<div class="blockExplanation">
 			{{ this.explanation }}
 		</div>
-		<button class="buttonHelp" @click.prevent="nextGame()">Seguinte</button><br>
+		<button class="buttonNextQuestion" @click.prevent="nextGame()">Seguinte</button><br>
 
 	</div>
 
@@ -34,6 +36,12 @@
 	<div class="outsideBorder">
 		<div class="insideBar" :style="{ width: this.progress }"></div>
 	</div>
+
+	<div>
+        &nbsp;<br>
+        &nbsp;<br>
+        &nbsp;<br>
+    </div>
 </template>
 
 <script>
@@ -190,7 +198,7 @@ export default {
 
 .blockExplanation {
 	text-align: left;
-	font-size: 12px;
+	font-size: 14px;
 	padding: 10px;
 	border-radius: 22px;
 	background-color: #BDECFF;
@@ -202,6 +210,7 @@ export default {
 .tittleExplanation {
 	margin-top: 20px;
 	margin-bottom: 10px;
+	font-size: 16px;
 }
 
 
@@ -216,11 +225,37 @@ export default {
 	width: 35%;
 }
 
+.buttonNextQuestion{
+	padding: 10px;
+	border-radius: 22px;
+	background-color: #14967F;
+	border: 0;
+	color: white;
+	cursor: pointer;
+	width: 40%;
+	font-size: 18px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.buttonVerify {
+	padding: 10px;
+	border-radius: 22px;
+	background-color: #14967F;
+	border: 0;
+	color: white;
+	cursor: pointer;
+	width: 40%;
+	font-size: 18px;
+	margin-top: 15px;
+}
+
+
 .answerCorrect {
 	color: #5fcf77;
 	font-size: 18px;
 	font-weight: 600;
-	border: 3px solid #7dc78d;
+	/* border: 3px solid #8ae99f; */
 	border-radius: 30px;
 	margin-bottom: 10px;
 }
@@ -229,7 +264,7 @@ export default {
 	color: #E84558;
 	font-size: 18px;
 	font-weight: 600;
-	border: 3px solid #FFB0B0;
+	/* border: 3px solid #FFB0B0; */
 	border-radius: 30px;
 	margin-bottom: 10px;
 }
