@@ -32,7 +32,22 @@
     </div>
     <!-- <div>Missões todas concluidas!</div> -->
 
-    <div class="achievements left">Conquistas</div>
+    <div class="flexLine">
+        <div class="achievements left">Conquistas</div>
+        <div class="achievementsHelp left" @click.prevent="this.help = !this.help">Dúvidas?</div>
+    </div>
+    <div v-if="this.help" class="achievementsExplanation left"><b>
+            <p>Como é que funcionam as conquistas?</p>
+        </b>
+        As conquistas funcionam pela quantidade de perguntas que acerta para cada temática. Se fizer uma lição na
+        temática "Dor" e acertar as 5 questões, irá receber 5 pontos para esta barra.<br>
+        Quando atinge um número de questões certas por cada temática sobre de nível. Os níveis atuais existentes são:
+        <ol>1. Principiante</ol>
+        <ol>2. Competente</ol>
+        <ol>3. Perito</ol>
+        <ol>4. Mestre</ol>
+        Acerte questões nos diferentes modos de jogo para se tornar Mestre em todas as temáticas ✨
+    </div>
     <div v-for="award in this.awards" :key="award.award_id">
         <div class="left">{{ award.categoryName }} - {{ award.levelDesc }}</div>
         <div class="outsideBoxAwards" :style="{ backgroundColor: award.color }">
@@ -69,7 +84,7 @@
             </div>
         </div> -->
 
-        <div class="BottomBaroutsideBox">
+    <div class="BottomBaroutsideBox">
         <button class="BottomBarbuttonNav BottomBarmarginLeftNo" @click="action('/main2')">
             <img class="BottomBariconImg" src="../assets/icons/home.png" alt="Home" />
         </button>
@@ -110,6 +125,7 @@ export default {
             level: 0,
             missions: {},
             awards: {},
+            help: false,
         };
     },
     async created() {
@@ -176,29 +192,29 @@ export default {
             });
 
             //console.log(res.data)
-           
+
             this.awards = res.data;
 
             for (let index = 0; index < this.awards.length; index++) {
                 const element = this.awards[index];
                 console.log(element.categoryName)
-                if(element.categoryName == "Dor"){
+                if (element.categoryName == "Dor") {
                     this.awards[index].color = "#98d7b7"
-                }else if(element.categoryName == "Dispneia"){
+                } else if (element.categoryName == "Dispneia") {
                     this.awards[index].color = "#77c7a8"
-                }else if(element.categoryName == "Insónia"){
+                } else if (element.categoryName == "Insónia") {
                     this.awards[index].color = "#4ab195"
-                }else if(element.categoryName == "Fadiga"){
+                } else if (element.categoryName == "Fadiga") {
                     this.awards[index].color = "#35a68c"
-                }else if(element.categoryName == "Ansiedade"){
+                } else if (element.categoryName == "Ansiedade") {
                     this.awards[index].color = "#14967F"
-                }else if(element.categoryName == "Anorexia"){
+                } else if (element.categoryName == "Anorexia") {
                     this.awards[index].color = "#128b7f"
-                }else if(element.categoryName == "Diarreia"){
+                } else if (element.categoryName == "Diarreia") {
                     this.awards[index].color = "#10807f"
-                }else if(element.categoryName == "Obstipação"){
+                } else if (element.categoryName == "Obstipação") {
                     this.awards[index].color = "#0e767f"
-                }else if(element.categoryName == "Vómitos"){
+                } else if (element.categoryName == "Vómitos") {
                     this.awards[index].color = "#0c6b7f"
                 }
             }
@@ -272,6 +288,33 @@ export default {
     font-weight: 600;
     margin-top: 20px;
     margin-bottom: 5px;
+}
+
+.flexLine {
+    display: flex;
+}
+
+.achievementsHelp {
+    font-size: 14px;
+    background-color: #095D7E;
+    color: white;
+    border-radius: 20px;
+    padding: 5px;
+    width: 18%;
+    margin-bottom: 0px;
+    height: 22px;
+    margin-top: 18px;
+    margin-left: 10px;
+}
+
+.achievementsExplanation {
+    font-size: 14px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #095D7E;
+    color: white;
+    border-radius: 20px;
+    padding: 5px;
 }
 
 .outsideBoxMission {

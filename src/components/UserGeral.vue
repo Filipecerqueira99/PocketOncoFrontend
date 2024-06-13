@@ -9,7 +9,7 @@
                 <button class="buttonAddFriends" @click.prevent="addFriendsLabel = !addFriendsLabel"><img
                         class="iconImg" src="../assets/icons/share.png" alt="addFriends" /> Aceitar
                     Amigos</button>
-                <button class="buttonShare" @click.prevent="dailyGame()"><img class="iconImg"
+                <button class="buttonShare" @click.prevent="shareProfile()"><img class="iconImg"
                         src="../assets/icons/share.png" alt="share" /> </button>
             </div>
         </div>
@@ -354,6 +354,15 @@ export default {
             console.log(this.selectedPage)
             this.$router.push(value)
         },
+        shareProfile() {
+            toast.info("Texto copiado para a tua área de transferência! Vai a uma conversa com os teus amigos e cola a mensagem!", {
+                autoClose: 8000,
+            });
+
+            navigator.clipboard.writeText("Adiciona-me aos teus amigos na aplicação PocketOnco! O meu email para me adicionares é: " +
+            this.email + "!" + " Sabe mais informação em: https://pocket-onco-frontend.vercel.app/login"
+            );
+        }
     },
 };
 </script>
