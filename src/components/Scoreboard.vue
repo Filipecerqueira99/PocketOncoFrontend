@@ -1,5 +1,5 @@
 <template>
-    <div class="titleContainer">Desafios</div>
+    <div class="titleContainer">Social</div>
     <div class="subTitleContainer">Como estão os teus amigos:</div>
     <div class="subtitle" v-if="!this.userResultsList">Adiciona amigos para veres como eles estão!</div>
 
@@ -216,6 +216,7 @@ export default {
 
 .subTitleContainer {
     display: flex;
+    margin-bottom: 10px;
 }
 
 .titleContainer {
@@ -257,9 +258,9 @@ export default {
 
 
     flex: 0 0 auto; /* Prevent resizing and ensure all items have the same width */
-    width: 150px; /* Fixed width for each item */
+    width: 140px; /* Fixed width for each item */
     height: 170px; /* Fixed height for each item */
-    margin: 10px;
+    margin: 7px;
     background-color: lightblue;
     /*display: flex;*/
     align-items: center;

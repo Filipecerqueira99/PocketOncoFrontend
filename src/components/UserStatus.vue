@@ -187,20 +187,20 @@ export default {
 
 .outsideBox {
     margin-top: 10px;
-    background: #095D7E;
+    background: #BDECFF;
     border-radius: 20px;
 }
 
 .outsideBoxAwards{
     margin-bottom: 10px;
-    background: #095D7E;
+    background: #BDECFF;
     border-radius: 20px;
 }
 
 .insideBox {
     height: 24px;
     width: 70%;
-    background: #BDECFF;
+    background: #095D7E;
     border-radius: 20px;
     margin-right: 10px;
     text-align: right;
@@ -208,6 +208,7 @@ export default {
 
 .boxText {
     margin-right: 10px;
+    color: white;
 }
 
 

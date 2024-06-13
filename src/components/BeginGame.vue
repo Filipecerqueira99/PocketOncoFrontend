@@ -12,7 +12,10 @@
             <img class="revisionImg" src="../assets/doctors/img2.png" alt="Boneco" />
         </div>
     </div>
-    <div class="tutorialsContainer">
+    Dúvidas sobre os jogos?
+    <button class="" @click.prevent="startGame()">Preciso de ajuda</button>
+
+    <div class="tutorialsContainer" v-if="this.showHelp">
         Tens dúvidas de como jogar os diferentes modos de jogo?
 
         <div class="boxTutorial">
@@ -104,6 +107,7 @@ export default {
     data() {
         return {
             userName: null,
+            showHelp: false,
         };
     },
     async created() {

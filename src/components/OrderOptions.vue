@@ -10,14 +10,27 @@
 			<div class="top">Mais importante</div>
 			<div class="line"></div>
 			<div class="buttons">
-				<button class="buttonAnswerOrdered" @click.prevent="changeOrder(this.lineA)">{{ this.lineA }}</button>
-				<button class="buttonAnswerOrdered" @click.prevent="changeOrder(this.lineB)">{{ this.lineB }}</button>
-				<button class="buttonAnswerOrdered" @click.prevent="changeOrder(this.lineC)">{{ this.lineC }}</button>
-				<button class="buttonAnswerOrdered" @click.prevent="changeOrder(this.lineD)">{{ this.lineD }}</button>
+				<button class="buttonAnswerOrdered"
+					:style="{ backgroundColor: this.selectedButton[this.lineA] == true ? '#14967e' : '#BDECFF' }"
+					@click.prevent="selectButton(this.lineA)">{{ this.lineA }}</button>
+				<button class="buttonAnswerOrdered"
+					:style="{ backgroundColor: this.selectedButton[this.lineB] == true ? '#14967e' : '#BDECFF' }"
+					@click.prevent="selectButton(this.lineB)">{{ this.lineB }}</button>
+				<button class="buttonAnswerOrdered"
+					:style="{ backgroundColor: this.selectedButton[this.lineC] == true ? '#14967e' : '#BDECFF' }"
+					@click.prevent="selectButton(this.lineC)">{{ this.lineC }}</button>
+				<button class="buttonAnswerOrdered"
+					:style="{ backgroundColor: this.selectedButton[this.lineD] == true ? '#14967e' : '#BDECFF' }"
+					@click.prevent="selectButton(this.lineD)">{{ this.lineD }}</button>
 			</div>
 			<div class="bottom">Menos importante</div>
 
+			<div class="arrowUp" @click.prevent="sendUp()">⬆️</div>
+			<div class="arrowDown" @click.prevent="sendDown()">⬇️</div>
+
 		</div>
+
+
 		<button class="buttonHelp" @click.prevent="finishGame()">Concluir</button><br>
 		<button class="buttonHelp" @click.prevent="help()">{{ this.showHideHelp }}</button><br><br>
 
@@ -86,6 +99,8 @@ export default {
 			orderedD: "",
 
 			progress: "0%",
+			selectedButton: [],
+			selectedLine: "",
 		}
 	},
 	async created() {
@@ -122,8 +137,50 @@ export default {
 
 	},
 	methods: {
+		selectButton(option) {
+			option != this.lineA ? this.selectedButton[this.lineA] = false : "";
+			option != this.lineB ? this.selectedButton[this.lineB] = false : "";
+			option != this.lineC ? this.selectedButton[this.lineC] = false : "";
+			option != this.lineD ? this.selectedButton[this.lineD] = false : "";
+			this.selectedButton[option] = !this.selectedButton[option];
+			this.selectedLine = option;
+		},
+		sendUp() {
+			/* if(this.selectedLine == this.lineA){}else  */
+
+			if (this.selectedLine == this.lineB) {
+				var aux = this.lineA;
+				this.lineA = this.lineB;
+				this.lineB = aux;
+			} else if (this.selectedLine == this.lineC) {
+				var aux = this.lineB;
+				this.lineB = this.lineC;
+				this.lineC = aux;
+			} else if (this.selectedLine == this.lineD) {
+				var aux = this.lineC;
+				this.lineC = this.lineD;
+				this.lineD = aux;
+			}
+		},
+		sendDown() {
+			if (this.selectedLine == this.lineA) {
+				var aux = this.lineB;
+				this.lineB = this.lineA;
+				this.lineA = aux;
+			} else if (this.selectedLine == this.lineB) {
+				var aux = this.lineC;
+				this.lineC = this.lineB;
+				this.lineB = aux;
+			} else if (this.selectedLine == this.lineC) {
+				var aux = this.lineD;
+				this.lineD = this.lineC;
+				this.lineC = aux;
+			}
+		},
+
 		changeOrder(option) {
 			console.log(option)
+			this.selectedButton[option] = !this.selectedButton[option]
 			if (this.lastSelected == null) {
 				this.lastSelected = option;
 			} else {
@@ -313,7 +370,7 @@ export default {
 	bottom: 20px;
 	left: 5%;
 	width: 4px;
-	background-color: #08394B;
+	background-color: #14967FA3;
 	border-radius: 20px;
 }
 
@@ -321,6 +378,20 @@ export default {
 	position: absolute;
 	top: 0px;
 	font-size: 10px;
+}
+
+.arrowUp {
+	position: absolute;
+	top: 37%;
+	right: 0px;
+	font-size: 30px;
+}
+
+.arrowDown {
+	position: absolute;
+	top: 54%;
+	right: 0px;
+	font-size: 30px;
 }
 
 .bottom {

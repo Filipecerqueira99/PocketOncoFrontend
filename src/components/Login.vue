@@ -12,6 +12,16 @@
     Ainda não tem conta?
     <button class="buttonRegister" @click.prevent="signup()">Registe-se</button>
   </div>
+  <div class="divider"></div>
+
+    
+    <button class="buttonRegister" @click.prevent="this.changePassword = !this.changePassword">Recuperar Senha</button>
+
+    <div v-if="this.changePassword">
+      <input type="text" v-model="email" placeholder=""><br>
+      <button class="buttonLogin" @click.prevent="newPassword()">Email Recuperação</button>
+
+    </div>
   <!-- <div class="mytextdiv">
     <div class="divider"></div>
     <div class="mytexttitle">
@@ -41,7 +51,8 @@ export default {
       email: "",
       password: "",
       formSent: false,
-      showMessage: ""
+      showMessage: "",
+      changePassword: false
     }
   },
   methods: {
@@ -142,6 +153,9 @@ export default {
     },
     signup() {
       this.$router.push("/signup")
+    },
+    newPassword(){
+      
     }
   }
 }
