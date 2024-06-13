@@ -11,7 +11,7 @@
 
     <div class="outsideBoxMission">
         <div class="Column" v-for="mission in this.missions" :key="mission.idMission"
-            :style="{ backgroundColor: mission.current_value == mission.goal ? '#14967FA3' : '#BDECFF' }">
+            :style="{ backgroundColor: mission.current_value == mission.goal ? '#14967FA3' : '#E2FCD6' }">
             <div class="friendName">{{ mission.description }}</div>
             <div class="outsideLevelPoints">
                 <b>{{ mission.current_value }}/{{ mission.goal }}</b>
@@ -35,7 +35,7 @@
     <div class="achievements left">Conquistas</div>
     <div v-for="award in this.awards" :key="award.award_id">
         <div class="left">{{ award.categoryName }} - {{ award.levelDesc }}</div>
-        <div class="outsideBoxAwards">
+        <div class="outsideBoxAwards" :style="{ backgroundColor: award.color }">
             <div class="insideBox" :style="{ width: Math.round(award.current_value * 100 / award.goal) + '%' }">
                 <div class="boxText">{{ Math.round(award.current_value * 100 / award.goal) }}%</div>
             </div>
@@ -175,8 +175,35 @@ export default {
                 console.log(error);
             });
 
-            console.log(res.data)
+            //console.log(res.data)
+           
             this.awards = res.data;
+
+            for (let index = 0; index < this.awards.length; index++) {
+                const element = this.awards[index];
+                console.log(element.categoryName)
+                if(element.categoryName == "Dor"){
+                    this.awards[index].color = "#98d7b7"
+                }else if(element.categoryName == "Dispneia"){
+                    this.awards[index].color = "#77c7a8"
+                }else if(element.categoryName == "Insónia"){
+                    this.awards[index].color = "#4ab195"
+                }else if(element.categoryName == "Fadiga"){
+                    this.awards[index].color = "#35a68c"
+                }else if(element.categoryName == "Ansiedade"){
+                    this.awards[index].color = "#14967F"
+                }else if(element.categoryName == "Anorexia"){
+                    this.awards[index].color = "#128b7f"
+                }else if(element.categoryName == "Diarreia"){
+                    this.awards[index].color = "#10807f"
+                }else if(element.categoryName == "Obstipação"){
+                    this.awards[index].color = "#0e767f"
+                }else if(element.categoryName == "Vómitos"){
+                    this.awards[index].color = "#0c6b7f"
+                }
+            }
+
+            console.log(this.awards)
 
         } catch (error) {
             console.log(error.response?.data)

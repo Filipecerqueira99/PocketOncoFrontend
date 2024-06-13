@@ -1,6 +1,6 @@
 <template>
-   <p class="title">PocketOnco</p>
-    <img class="loginImg" src="../assets/loginimg.png" alt="Folder" /><br>
+  <p class="title">PocketOnco</p>
+  <img class="loginImg" src="../assets/loginimg.png" alt="Folder" /><br>
   <form v-if="!this.newPassword">
     Email
     <input type="text" v-model="email" placeholder=""><br>
@@ -13,7 +13,7 @@
     <button class="buttonRegister" @click.prevent="signup()">Registe-se</button>
     <div class="divider"></div>
   </div>
-  
+
 
 
   <button v-if="this.newPassword == false" class="buttonRegister"
@@ -162,7 +162,9 @@ export default {
             this.formSent = true
           } else {
             this.formSent = false
-            this.showMessage = response.data.message
+            toast.error(response.data.message, {
+              autoClose: 3000,
+            });
           }
         } catch (error) {
           console.log(error.response.data)
@@ -187,12 +189,12 @@ export default {
         }).catch((error) => {
           console.log(error);
         });
-        
+
         toast.info(res.data, {
-            autoClose: 3000,
+          autoClose: 3000,
         });
 
-        if(res.data == "Email Enviado!"){
+        if (res.data == "Email Enviado!") {
           this.newPassword = true;
         }
       } catch (error) {
@@ -217,13 +219,13 @@ export default {
           this.changePassword = false;
           toast.info(res.data, {
             autoClose: 3000,
-        });
+          });
         } catch (error) {
           console.log(error.response?.data)
         }
-      }else{
+      } else {
         toast.info("Senhas têm de ser iguais.", {
-            autoClose: 3000,
+          autoClose: 3000,
         });
       }
     },
@@ -273,7 +275,7 @@ form>div {
   width: 40%;
 }
 
-.buttonNewPassword{
+.buttonNewPassword {
   margin-top: 30px;
   padding: 10px;
   border-radius: 22px;
