@@ -12,7 +12,7 @@
                 <div class="detailsFriend">{{ friend.streak }} dias</div>
             </div>
         </div>
-<!--         <div class="Column">
+        <!--         <div class="Column">
             <div class="friendName">Amigo1</div>
             <img class="loginImg" src="../assets/loginimg.png" alt="Folder" />
             <div class="outsideLevelPoints">
@@ -61,6 +61,24 @@
         </div>
     </div>
 
+    <div class="BottomBaroutsideBox">
+        <button class="BottomBarbuttonNav BottomBarmarginLeftNo" @click="action('/main2')">
+            <img class="BottomBariconImg" src="../assets/icons/home.png" alt="Home" />
+        </button>
+        <button class="BottomBarbuttonNav" @click="action('/userStatus')">
+            <img class="BottomBariconImg BottomBaraward" src="../assets/icons/award.png" alt="Userstatus" />
+        </button>
+        <!-- <button class="buttonNav" @click.prevent="action("main")">
+                <img class="iconImg" src="../assets/icons/ticket-detailed.png" alt="Home" />
+            </button> -->
+        <button class="BottomBarbuttonNav BottomBarselected" @click="action('/scoreboard')">
+            <img class="BottomBariconImg" src="../assets/icons/scoreboard.png" alt="Social" />
+        </button>
+        <button class="BottomBarbuttonNav" @click="action('/userGeral')">
+            <img class="BottomBariconImg" src="../assets/icons/user.png" alt="Profile" />
+        </button>
+    </div>
+
     <div>
         &nbsp;<br>
         &nbsp;<br>
@@ -88,7 +106,7 @@ export default {
     },
     async created() {
         this.idUser = localStorage.getItem('idUser');
-        if (!this.idUser){
+        if (!this.idUser) {
             this.$router.push("/login")
         }
         this.email = localStorage.getItem('email').slice(1).slice(0, -1);
@@ -102,62 +120,64 @@ export default {
 
         //friends levels and points
         try {
-             const res = await api({
-                 method: "post",
-                 url: `/users/getFriendsLevelPoints`,
-                 data: {
-                     "idUser": this.idUser,
-                 },
-             }).catch((error) => {
-                 console.log(error);
-             });
-             
-             console.log(res.data)
-             this.friendsValues = res.data;
-             
-         } catch (error) {
-             console.log(error.response?.data)
-         }
+            const res = await api({
+                method: "post",
+                url: `/users/getFriendsLevelPoints`,
+                data: {
+                    "idUser": this.idUser,
+                },
+            }).catch((error) => {
+                console.log(error);
+            });
+
+            console.log(res.data)
+            this.friendsValues = res.data;
+
+        } catch (error) {
+            console.log(error.response?.data)
+        }
 
 
         //scoreboard
-         try {
-             const res = await api({
-                 method: "post",
-                 url: `/users/getFriendsWeeklyResults`,
-                 data: {
-                     "idUser": this.idUser,
-                 },
-             }).catch((error) => {
-                 console.log(error);
-             });
-             
-            
-             res.data.sort((a, b) => b.weekly_points - a.weekly_points);
-            
-             let i = 0;
-             res.data.forEach(element => {
-                 res.data[i].position = i + 1;
-                 i++;
-             });
-             console.log(res.data)
-             this.userResultsList = res.data;
-             
-         } catch (error) {
-             console.log(error.response?.data)
-         }
+        try {
+            const res = await api({
+                method: "post",
+                url: `/users/getFriendsWeeklyResults`,
+                data: {
+                    "idUser": this.idUser,
+                },
+            }).catch((error) => {
+                console.log(error);
+            });
+
+
+            res.data.sort((a, b) => b.weekly_points - a.weekly_points);
+
+            let i = 0;
+            res.data.forEach(element => {
+                res.data[i].position = i + 1;
+                i++;
+            });
+            console.log(res.data)
+            this.userResultsList = res.data;
+
+        } catch (error) {
+            console.log(error.response?.data)
+        }
 
     },
     methods: {
-
+        action(value) {
+            this.selectedPage = value;
+            console.log(this.selectedPage)
+            this.$router.push(value)
+        },
     }
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-
-.detailsFriend{
+.detailsFriend {
     margin-top: -5px;
     font-size: 14px;
 }
@@ -246,8 +266,10 @@ export default {
     /*Optional*/
 
     display: flex;
-    overflow-x: auto; /* Enable horizontal scrolling */
-    white-space: nowrap; /* Prevents the items from wrapping to the next line */
+    overflow-x: auto;
+    /* Enable horizontal scrolling */
+    white-space: nowrap;
+    /* Prevents the items from wrapping to the next line */
 }
 
 
@@ -257,9 +279,12 @@ export default {
     box-shadow: 0px 3px 1px 1px #abbec6;
 
 
-    flex: 0 0 auto; /* Prevent resizing and ensure all items have the same width */
-    width: 140px; /* Fixed width for each item */
-    height: 170px; /* Fixed height for each item */
+    flex: 0 0 auto;
+    /* Prevent resizing and ensure all items have the same width */
+    width: 140px;
+    /* Fixed width for each item */
+    height: 170px;
+    /* Fixed height for each item */
     margin: 7px;
     background-color: lightblue;
     /*display: flex;*/

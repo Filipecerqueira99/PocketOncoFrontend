@@ -7,7 +7,7 @@
             </div>
             <div class="twoButtons">
                 <button class="buttonAddFriends" @click.prevent="addFriendsLabel = !addFriendsLabel"><img
-                        class="iconImg"  src="../assets/icons/share.png" alt="addFriends" /> Aceitar
+                        class="iconImg" src="../assets/icons/share.png" alt="addFriends" /> Aceitar
                     Amigos</button>
                 <button class="buttonShare" @click.prevent="dailyGame()"><img class="iconImg"
                         src="../assets/icons/share.png" alt="share" /> </button>
@@ -27,18 +27,30 @@
     <div class="allImageBox" v-if="changeImgProfile">
         <br>
         Escolhe uma imagem de perfil:<br><br>
-        <img class="selectUserImg" src="../assets/profile/img1.png" alt="mainimg" @click.prevent="changeProfileImage('img1')" />
-        <img class="selectUserImg" src="../assets/profile/img2.png" alt="mainimg" @click.prevent="changeProfileImage('img2')" />
-        <img class="selectUserImg" src="../assets/profile/img3.png" alt="mainimg" @click.prevent="changeProfileImage('img3')" /><br>
-        <img class="selectUserImg" src="../assets/profile/img4.png" alt="mainimg" @click.prevent="changeProfileImage('img4')"  />
-        <img class="selectUserImg" src="../assets/profile/img5.png" alt="mainimg" @click.prevent="changeProfileImage('img5')" />
-        <img class="selectUserImg" src="../assets/profile/img6.png" alt="mainimg" @click.prevent="changeProfileImage('img6')" /><br>
-        <img class="selectUserImg" src="../assets/profile/img7.png" alt="mainimg" @click.prevent="changeProfileImage('img7')" />
-        <img class="selectUserImg" src="../assets/profile/img8.png" alt="mainimg" @click.prevent="changeProfileImage('img8')" />
-        <img class="selectUserImg" src="../assets/profile/img9.png" alt="mainimg" @click.prevent="changeProfileImage('img9')" /><br>
-        <img class="selectUserImg" src="../assets/profile/img10.png" alt="mainimg" @click.prevent="changeProfileImage('img10')"  />
-        <img class="selectUserImg" src="../assets/profile/img11.png" alt="mainimg" @click.prevent="changeProfileImage('img11')" />
-        <img class="selectUserImg" src="../assets/profile/img12.png" alt="mainimg" @click.prevent="changeProfileImage('img12')" /><br>
+        <img class="selectUserImg" src="../assets/profile/img1.png" alt="mainimg"
+            @click.prevent="changeProfileImage('img1')" />
+        <img class="selectUserImg" src="../assets/profile/img2.png" alt="mainimg"
+            @click.prevent="changeProfileImage('img2')" />
+        <img class="selectUserImg" src="../assets/profile/img3.png" alt="mainimg"
+            @click.prevent="changeProfileImage('img3')" /><br>
+        <img class="selectUserImg" src="../assets/profile/img4.png" alt="mainimg"
+            @click.prevent="changeProfileImage('img4')" />
+        <img class="selectUserImg" src="../assets/profile/img5.png" alt="mainimg"
+            @click.prevent="changeProfileImage('img5')" />
+        <img class="selectUserImg" src="../assets/profile/img6.png" alt="mainimg"
+            @click.prevent="changeProfileImage('img6')" /><br>
+        <img class="selectUserImg" src="../assets/profile/img7.png" alt="mainimg"
+            @click.prevent="changeProfileImage('img7')" />
+        <img class="selectUserImg" src="../assets/profile/img8.png" alt="mainimg"
+            @click.prevent="changeProfileImage('img8')" />
+        <img class="selectUserImg" src="../assets/profile/img9.png" alt="mainimg"
+            @click.prevent="changeProfileImage('img9')" /><br>
+        <img class="selectUserImg" src="../assets/profile/img10.png" alt="mainimg"
+            @click.prevent="changeProfileImage('img10')" />
+        <img class="selectUserImg" src="../assets/profile/img11.png" alt="mainimg"
+            @click.prevent="changeProfileImage('img11')" />
+        <img class="selectUserImg" src="../assets/profile/img12.png" alt="mainimg"
+            @click.prevent="changeProfileImage('img12')" /><br>
     </div>
 
     <div class="outsideBox">
@@ -140,17 +152,35 @@
 
     <div class="subTitleContainer">Parabéns! Continua com este ritmo!</div> -->
 
-<div class="twoButtons">
-    <div class="buttonOnLeft">
-        <button class="buttonNext" @click.prevent="symptoms()"><img class="iconImg" src="../assets/icons/setting.png"
-                alt="setting" /> Sintomas</button>
+    <div class="twoButtons">
+        <div class="buttonOnLeft">
+            <button class="buttonNext" @click.prevent="symptoms()"><img class="iconImg"
+                    src="../assets/icons/setting.png" alt="setting" /> Sintomas</button>
+        </div>
+
+        <div class="buttonOnRight">
+            <button class="buttonNext" @click.prevent="settings()"><img class="iconImg"
+                    src="../assets/icons/setting.png" alt="setting" /> Definições</button>
+        </div>
     </div>
 
-    <div class="buttonOnRight">
-        <button class="buttonNext" @click.prevent="settings()"><img class="iconImg" src="../assets/icons/setting.png"
-                alt="setting" /> Definições</button>
+    <div class="BottomBaroutsideBox">
+        <button class="BottomBarbuttonNav BottomBarmarginLeftNo" @click="action('/main2')">
+            <img class="BottomBariconImg" src="../assets/icons/home.png" alt="Home" />
+        </button>
+        <button class="BottomBarbuttonNav" @click="action('/userStatus')">
+            <img class="BottomBariconImg BottomBaraward" src="../assets/icons/award.png" alt="Userstatus" />
+        </button>
+        <!-- <button class="buttonNav" @click.prevent="action("main")">
+                <img class="iconImg" src="../assets/icons/ticket-detailed.png" alt="Home" />
+            </button> -->
+        <button class="BottomBarbuttonNav" @click="action('/scoreboard')">
+            <img class="BottomBariconImg" src="../assets/icons/scoreboard.png" alt="Social" />
+        </button>
+        <button class="BottomBarbuttonNav BottomBarselected" @click="action('/userGeral')">
+            <img class="BottomBariconImg" src="../assets/icons/user.png" alt="Profile" />
+        </button>
     </div>
-</div>
     <div>
         &nbsp;<br>
         &nbsp;<br>
@@ -189,7 +219,7 @@ export default {
     },
     async created() {
         this.idUser = localStorage.getItem('idUser');
-        if (!this.idUser){
+        if (!this.idUser) {
             this.$router.push("/login")
         }
         this.email = localStorage.getItem('email').slice(1).slice(0, -1);
@@ -222,7 +252,7 @@ export default {
         settings() {
             this.$router.push("/userProfile")
         },
-        symptoms(){
+        symptoms() {
             this.$router.push("/currentSymptoms")
         },
         async sendFriendRequest(email) {
@@ -294,7 +324,7 @@ export default {
                 });
             }
         },
-        async changeProfileImage(imgRecieved){
+        async changeProfileImage(imgRecieved) {
             try {
                 const res = await api({
                     method: "post",
@@ -307,8 +337,8 @@ export default {
                     console.log(error);
                 });
                 toast.info(res.data, {
-                        autoClose: 3000,
-                    });
+                    autoClose: 3000,
+                });
                 this.changeImgProfile = false
                 localStorage.setItem('img', JSON.stringify(imgRecieved));
                 this.img = imgRecieved
@@ -318,7 +348,12 @@ export default {
                     autoClose: 3000,
                 });
             }
-        }
+        },
+        action(value) {
+            this.selectedPage = value;
+            console.log(this.selectedPage)
+            this.$router.push(value)
+        },
     },
 };
 </script>
@@ -354,11 +389,11 @@ input {
     margin-left: 5px;
 }
 
-.twoButtons{
+.twoButtons {
     display: flex;
 }
 
-.buttonOnLeft{
+.buttonOnLeft {
     text-align: left;
 }
 
@@ -416,7 +451,7 @@ input {
     cursor: pointer;
 }
 
-.allImageBox{
+.allImageBox {
     margin-top: 10px;
     margin-bottom: 10px;
     background: rgb(9, 93, 126);
@@ -426,7 +461,7 @@ input {
     box-shadow: 0px 3px 1px 1px #abbec6;
 }
 
-.selectUserImg{
+.selectUserImg {
     width: 80px;
     height: 80px;
     margin-right: 10px;
@@ -452,9 +487,12 @@ input {
     box-shadow: 0px 3px 1px 1px #abbec6;
 
 
-    flex: 0 0 auto; /* Prevent resizing and ensure all items have the same width */
-    width: 130px; /* Fixed width for each item */
-    height: 150px; /* Fixed height for each item */
+    flex: 0 0 auto;
+    /* Prevent resizing and ensure all items have the same width */
+    width: 130px;
+    /* Fixed width for each item */
+    height: 150px;
+    /* Fixed height for each item */
     margin: 10px;
     background-color: lightblue;
     /*display: flex;*/
@@ -463,7 +501,7 @@ input {
 
 }
 
-.outsideBoxFriends{
+.outsideBoxFriends {
     background-color: #DEF6FF;
     box-shadow: 0px 8px 5px 5px #abbec6;
     margin-bottom: 30px;
@@ -478,8 +516,10 @@ input {
     /*Optional*/
 
     display: flex;
-    overflow-x: auto; /* Enable horizontal scrolling */
-    white-space: nowrap; /* Prevents the items from wrapping to the next line */
+    overflow-x: auto;
+    /* Enable horizontal scrolling */
+    white-space: nowrap;
+    /* Prevents the items from wrapping to the next line */
 }
 
 

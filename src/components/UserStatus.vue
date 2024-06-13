@@ -68,7 +68,26 @@
                 <div class="boxText">44%</div>
             </div>
         </div> -->
-        <div>
+
+        <div class="BottomBaroutsideBox">
+        <button class="BottomBarbuttonNav BottomBarmarginLeftNo" @click="action('/main2')">
+            <img class="BottomBariconImg" src="../assets/icons/home.png" alt="Home" />
+        </button>
+        <button class="BottomBarbuttonNav BottomBarselected" @click="action('/userStatus')">
+            <img class="BottomBariconImg BottomBaraward" src="../assets/icons/award.png" alt="Userstatus" />
+        </button>
+        <!-- <button class="buttonNav" @click.prevent="action("main")">
+                <img class="iconImg" src="../assets/icons/ticket-detailed.png" alt="Home" />
+            </button> -->
+        <button class="BottomBarbuttonNav" @click="action('/scoreboard')">
+            <img class="BottomBariconImg" src="../assets/icons/scoreboard.png" alt="Social" />
+        </button>
+        <button class="BottomBarbuttonNav" @click="action('/userGeral')">
+            <img class="BottomBariconImg" src="../assets/icons/user.png" alt="Profile" />
+        </button>
+    </div>
+
+    <div>
         &nbsp;<br>
         &nbsp;<br>
         &nbsp;<br>
@@ -95,7 +114,7 @@ export default {
     },
     async created() {
         this.idUser = localStorage.getItem('idUser');
-        if (!this.idUser){
+        if (!this.idUser) {
             this.$router.push("/login")
         }
         this.email = localStorage.getItem('email').slice(1).slice(0, -1);
@@ -106,10 +125,10 @@ export default {
         this.streak = JSON.parse(localStorage.getItem("streak"));
         this.level = JSON.parse(localStorage.getItem("level"));
 
-         //create daily missions if needed
-         //var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+        //create daily missions if needed
+        //var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
         //console.log(utc);
-         try {
+        try {
             const res = await api({
                 method: "post",
                 url: `/missionawards/createDailyMissions`,
@@ -165,7 +184,11 @@ export default {
 
     },
     methods: {
-
+        action(value) {
+            this.selectedPage = value;
+            console.log(this.selectedPage)
+            this.$router.push(value)
+        },
     }
 };
 </script>
@@ -191,7 +214,7 @@ export default {
     border-radius: 20px;
 }
 
-.outsideBoxAwards{
+.outsideBoxAwards {
     margin-bottom: 10px;
     background: #BDECFF;
     border-radius: 20px;

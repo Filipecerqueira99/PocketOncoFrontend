@@ -65,11 +65,30 @@
         </div>
     </div>
 
+    <div class="BottomBaroutsideBox">
+        <button class="BottomBarbuttonNav BottomBarmarginLeftNo BottomBarselected" @click="action('/main2')">
+            <img class="BottomBariconImg" src="../assets/icons/home.png" alt="Home" />
+        </button>
+        <button class="BottomBarbuttonNav" @click="action('/userStatus')">
+            <img class="BottomBariconImg BottomBaraward" src="../assets/icons/award.png" alt="Userstatus" />
+        </button>
+        <!-- <button class="buttonNav" @click.prevent="action("main")">
+                <img class="iconImg" src="../assets/icons/ticket-detailed.png" alt="Home" />
+            </button> -->
+        <button class="BottomBarbuttonNav" @click="action('/scoreboard')">
+            <img class="BottomBariconImg" src="../assets/icons/scoreboard.png" alt="Social" />
+        </button>
+        <button class="BottomBarbuttonNav" @click="action('/userGeral')">
+            <img class="BottomBariconImg" src="../assets/icons/user.png" alt="Profile" />
+        </button>
+    </div>
+
     <div>
         &nbsp;<br>
         &nbsp;<br>
         &nbsp;<br>
     </div>
+
 </template>
 
 <script>
@@ -126,6 +145,11 @@ export default {
         tematicGame(category_id) {
             localStorage.setItem('tematicGame', category_id);
             this.$router.push("/beginGame")
+        },
+        action(value) {
+            this.selectedPage = value;
+            console.log(this.selectedPage)
+            this.$router.push(value)
         },
     },
 };
@@ -248,4 +272,6 @@ export default {
     cursor: pointer;
     width: 80%;
 }
+
+
 </style>

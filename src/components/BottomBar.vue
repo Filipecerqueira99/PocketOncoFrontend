@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isSigned()" class="outsideBox">
+    <div v-if="isSigned()" class="outsideBox" >
         <button class="buttonNav marginLeftNo" :style="{ border: selectedPage == '/main2' ? '3px solid white' : '0px' }"
             @click="action('/main2')">
             <img class="iconImg" src="../assets/icons/home.png" alt="Home" />
@@ -39,6 +39,7 @@ export default {
             localStorage.removeItem('idUser');
             this.$router.push("/login")
             this.Popup = false
+            this.showBar = true
         },
         isSigned() {
             //console.log(localStorage.getItem('idUser'))
@@ -51,6 +52,7 @@ export default {
             }
         },
         action(value) {
+            this.isSigned()
             this.selectedPage = value;
             console.log(this.selectedPage)
             this.$router.push(value)
