@@ -5,7 +5,7 @@
 
 	<div class="orderChoice" v-if="!this.hasPlayed">
 		<div class="container">
-			<div class="top">Mais importante</div>
+			<div class="top">Mais</div>
 			<div class="line"></div>
 			<div class="buttons">
 				<button class="buttonAnswerOrdered"
@@ -21,7 +21,7 @@
 					:style="{ backgroundColor: this.selectedButton[this.lineD] == true ? '#14967e' : '#BDECFF' }"
 					@click.prevent="selectButton(this.lineD)">{{ this.lineD }}</button>
 			</div>
-			<div class="bottom">Menos importante</div>
+			<div class="bottom">Menos</div>
 
 			<div class="arrowUp" @click.prevent="sendUp()">⬆️</div>
 			<div class="arrowDown" @click.prevent="sendDown()">⬇️</div>
@@ -381,30 +381,34 @@ export default {
 	border-radius: 20px;
 }
 
-.top {
-	position: absolute;
-	top: 0px;
-	font-size: 10px;
-}
 
 .arrowUp {
 	position: absolute;
 	top: 37%;
-	right: 0px;
+	right: -4px;
 	font-size: 30px;
 }
 
 .arrowDown {
 	position: absolute;
 	top: 54%;
-	right: 0px;
+	right: -4px;
 	font-size: 30px;
 }
+
+.top {
+	position: absolute;
+	top: 0px;
+	font-size: 10px;
+	left: 6px;
+}
+
 
 .bottom {
 	position: absolute;
 	bottom: 0px;
 	font-size: 10px;
+	left: 5px;
 }
 
 .buttons {

@@ -12,9 +12,12 @@
             <img class="revisionImg" src="../assets/doctors/img2.png" alt="Boneco" />
         </div>
     </div>
-    Dúvidas sobre os jogos?
-    <button class="" @click.prevent="startGame()">Preciso de ajuda</button>
 
+    <div class="divider"></div>
+    <div class="doubts">
+        Dúvidas sobre os jogos?
+        <button class="buttonHelp" @click.prevent="this.showHelp = !this.showHelp">Ajuda</button>
+    </div>
     <div class="tutorialsContainer" v-if="this.showHelp">
         Tens dúvidas de como jogar os diferentes modos de jogo?
 
@@ -46,8 +49,10 @@
                     <li>Início do Jogo: O jogo começa com uma afirmação ou frase apresentada na tela.</li>
                     <li>Opções de Resposta: Abaixo da afirmação, haverá duas opções de resposta: "Verdadeiro" e "Falso".
                     </li>
-                    <li> Escolha uma Opção: Leia a afirmação cuidadosamente e selecione se você acha que ela é verdadeira ou
-                        falsa. Isso pode ser feito clicando na opção desejada ou tocando na tela, dependendo do dispositivo.
+                    <li> Escolha uma Opção: Leia a afirmação cuidadosamente e selecione se você acha que ela é
+                        verdadeira ou
+                        falsa. Isso pode ser feito clicando na opção desejada ou tocando na tela, dependendo do
+                        dispositivo.
                     </li>
                     <li>Confirmar Resposta: Em alguns jogos, após escolher uma opção, você pode precisar confirmar sua
                         resposta clicando em um botão "Confirmar" ou "Enviar".</li>
@@ -70,11 +75,16 @@
             <img class="tutorialImg" src="../assets/3.png" alt="Escolha" />
             <div class="alignLeft">
                 <ol>
-                    <li>Início do Jogo: O jogo começa com uma lista de itens ou declarações apresentados na tela, desordenados.</li>
-                    <li>Objetivo: Seu objetivo é reorganizar os itens em ordem de importância, colocando o mais importante no topo e o menos importante na parte inferior.</li>
-                    <li>Reorganizar Itens: Para reorganizar, você deve clicar no item que pretende alterar posição com o item que está na posição desejada.</li>
-                    <li>Confirmar Ordem: Após organizar os itens na ordem desejada, você pode precisar confirmar sua escolha clicando em um botão "Confirmar" ou "Enviar".</li>
-                    <li>Receber Feedback: O jogo irá comparar sua ordem com a ordem correta e informar o quão bem você se saiu. Muitas vezes, uma explicação adicional será fornecida.</li>
+                    <li>Início do Jogo: O jogo começa com uma lista de itens ou declarações apresentados na tela,
+                        desordenados.</li>
+                    <li>Objetivo: Seu objetivo é reorganizar os itens em ordem de importância, colocando o mais
+                        importante no topo e o menos importante na parte inferior.</li>
+                    <li>Reorganizar Itens: Para reorganizar, você deve clicar no item que pretende alterar posição com o
+                        item que está na posição desejada.</li>
+                    <li>Confirmar Ordem: Após organizar os itens na ordem desejada, você pode precisar confirmar sua
+                        escolha clicando em um botão "Confirmar" ou "Enviar".</li>
+                    <li>Receber Feedback: O jogo irá comparar sua ordem com a ordem correta e informar o quão bem você
+                        se saiu. Muitas vezes, uma explicação adicional será fornecida.</li>
 
 
                 </ol>
@@ -112,10 +122,10 @@ export default {
     },
     async created() {
         let userId = JSON.parse(localStorage.getItem("idUser"));
-        if (!userId){
+        if (!userId) {
             this.$router.push("/login")
         }
-        
+
         this.userName = localStorage.getItem('first_name').slice(1).slice(0, -1);
         //this.lastname = localStorage.getItem('last_name').slice(1).slice(0, -1);
         localStorage.setItem('playGame', true);
@@ -276,4 +286,28 @@ export default {
     color: black;
     width: 90%;
     margin-left: 5px;
-}</style>
+}
+
+.doubts {
+    margin-top: 30px;
+}
+
+.divider {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #095D7E;
+    margin-top: 30px;
+}
+
+.buttonHelp{
+	border-radius: 22px;
+	background-color: #14967F;
+	border: 0;
+	color: white;
+	cursor: pointer;
+	font-size: 20px;
+    width: 30%;
+    height: 40px;
+    margin-left: 2px;
+}
+</style>

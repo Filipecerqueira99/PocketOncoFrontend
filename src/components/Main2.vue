@@ -31,35 +31,35 @@
     <div class="outsideBox">
         <div class="title">Temáticas</div>
         <div class="threelineBox">
-            <button class="buttonNav" @click.prevent="tematicGame(1)">Dor<br>
+            <button class="buttonNav" style="background-color: #b9e8c5" @click.prevent="tematicGame(1)">Dor<br>
                 <img class="iconImg" src="../assets/symptoms/Dor.png" alt="Dor" />
             </button>
-            <button class="buttonNav" @click.prevent="tematicGame(2)">Dispneia
+            <button class="buttonNav" style="background-color: #abe1bf" @click.prevent="tematicGame(2)">Dispneia
                 <img class="iconImg" src="../assets/symptoms/Dispneia.png" alt="Dispneia" />
             </button>
-            <button class="buttonNav" @click.prevent="tematicGame(3)">Insónia
+            <button class="buttonNav" style="background-color: #6FC3A6" @click.prevent="tematicGame(3)">Insónia
                 <img class="iconImg" src="../assets/symptoms/Insonia.png" alt="Insonia" />
             </button>
         </div>
         <div class="threelineBox">
-            <button class="buttonNav" @click.prevent="tematicGame(4)">Fadiga
+            <button class="buttonNav" style="background-color: #34A68D" @click.prevent="tematicGame(4)">Fadiga
                 <img class="iconImg" src="../assets/symptoms/Fadiga.png" alt="Fadiga" />
             </button>
-            <button class="buttonNav" @click.prevent="tematicGame(5)">Ansiedade
+            <button class="buttonNav" style="background-color: #14967F" @click.prevent="tematicGame(5)">Ansiedade
                 <img class="iconImg" src="../assets/symptoms/Ansiedade.png" alt="Ansiedade" />
             </button>
-            <button class="buttonNav" @click.prevent="tematicGame(6)">Anorexia
+            <button class="buttonNav" style="background-color: #11857F" @click.prevent="tematicGame(6)">Anorexia
                 <img class="iconImg" src="../assets/symptoms/Anorexia.png" alt="Anorexia" />
             </button>
         </div>
         <div class="threelineBox">
-            <button class="buttonNav" @click.prevent="tematicGame(7)">Diarreia
+            <button class="buttonNav" style="background-color: #0D737F" @click.prevent="tematicGame(7)">Diarreia
                 <img class="iconImg" src="../assets/symptoms/Diarreia.png" alt="Diarreia" />
             </button>
-            <button class="buttonNav" @click.prevent="tematicGame(8)">Obstipação
+            <button class="buttonNav" style="background-color: #0B677E" @click.prevent="tematicGame(8)">Obstipação
                 <img class="iconImg" src="../assets/symptoms/Obstipação.png" alt="Obstipação" />
             </button>
-            <button class="buttonNav" @click.prevent="tematicGame(9)">Vómitos
+            <button class="buttonNav" style="background-color: #095D7E" @click.prevent="tematicGame(9)">Vómitos
                 <img class="iconImg" src="../assets/symptoms/Vómitos.png" alt="Vómitos" />
             </button>
         </div>
