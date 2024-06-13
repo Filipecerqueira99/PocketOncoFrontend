@@ -1,42 +1,27 @@
 <template>
-   <p class="title">PocketOnco</p>
-    <img class="loginImg" src="../assets/loginimg.png" alt="Folder" /><br>
-  <form v-if="!this.newPassword">
+  <form>
+    <p class="title">Recuperação da Senha</p>
+    
     Email
     <input type="text" v-model="email" placeholder=""><br>
     Senha
     <input type="password" v-model="password" placeholder=""><br>
     <button class="buttonLogin" @click.prevent="Login(this.email, this.password)">Entrar</button>
   </form>
-  <div v-if="!this.newPassword">
+  <div>
     Ainda não tem conta?
     <button class="buttonRegister" @click.prevent="signup()">Registe-se</button>
-    <div class="divider"></div>
   </div>
-  
+  <div class="divider"></div>
 
+    
+    <button class="buttonRegister" @click.prevent="this.changePassword = !this.changePassword">Recuperar Senha</button>
 
-  <button v-if="this.newPassword == false" class="buttonRegister"
-    @click.prevent="this.changePassword = !this.changePassword">Recuperar Senha</button>
+    <div v-if="this.changePassword">
+      <input type="text" v-model="email" placeholder=""><br>
+      <button class="buttonLogin" @click.prevent="newPassword()">Email Recuperação</button>
 
-  <div v-if="this.changePassword && this.newPassword == false">
-    <input type="text" v-model="emailNewPassword" placeholder=""><br>
-    <button class="buttonNewPassword" @click.prevent="sendEmail()">Email Recuperação</button>
-
-  </div>
-
-  <div v-if="this.newPassword">
-    <div class="title">Alterar Senha<br></div>
-    Código:<br>
-    <input type="text" v-model="code" placeholder=""><br>
-    Nova senha:
-    <input type="password" v-model="passwordNew" placeholder=""><br>
-    Confirmar senha:
-    <input type="password" v-model="passwordNew2" placeholder=""><br>
-    <button class="buttonNewPassword" @click.prevent="changeToNewPassword()">Alterar</button><br>
-    <button class="buttonLogin" @click.prevent="this.newPassword = false; this.changePassword = false;">Voltar</button>
-
-  </div>
+    </div>
   <!-- <div class="mytextdiv">
     <div class="divider"></div>
     <div class="mytexttitle">
@@ -58,23 +43,16 @@
 
 <script>
 import api from '../api/api.js'
-import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
 /* eslint-disable */
 export default {
-  name: 'Login',
+  name: 'NewPassowrd',
   data() {
     return {
       email: "",
       password: "",
       formSent: false,
       showMessage: "",
-      changePassword: false,
-      newPassword: false,
-      emailNewPassword: "",
-      passwordNew: "",
-      passwordNew2: "",
-      code: "",
+      changePassword: false
     }
   },
   methods: {
@@ -176,57 +154,9 @@ export default {
     signup() {
       this.$router.push("/signup")
     },
-    async sendEmail() {
-      try {
-        const res = await api({
-          method: "post",
-          url: `/users/updateToNewPassword`,
-          data: {
-            "email": this.emailNewPassword
-          },
-        }).catch((error) => {
-          console.log(error);
-        });
-        
-        toast.info(res.data, {
-            autoClose: 3000,
-        });
-
-        if(res.data == "Email Enviado!"){
-          this.newPassword = true;
-        }
-      } catch (error) {
-        console.log(error.response?.data)
-      }
-    },
-    async changeToNewPassword() {
-      if (this.passwordNew == this.passwordNew2) {
-        try {
-          const res = await api({
-            method: "post",
-            url: `/users/updatePasswordReset`,
-            data: {
-              "email": this.emailNewPassword,
-              "password": this.passwordNew,
-              "code": this.code,
-            },
-          }).catch((error) => {
-            console.log(error);
-          });
-          this.newPassword = false;
-          this.changePassword = false;
-          toast.info(res.data, {
-            autoClose: 3000,
-        });
-        } catch (error) {
-          console.log(error.response?.data)
-        }
-      }else{
-        toast.info("Senhas têm de ser iguais.", {
-            autoClose: 3000,
-        });
-      }
-    },
+    newPassword(){
+      
+    }
   }
 }
 </script>
@@ -267,17 +197,6 @@ form>div {
   padding: 10px;
   border-radius: 22px;
   background-color: #2C85A7;
-  border: 0;
-  color: white;
-  cursor: pointer;
-  width: 40%;
-}
-
-.buttonNewPassword{
-  margin-top: 30px;
-  padding: 10px;
-  border-radius: 22px;
-  background-color: #14967F;
   border: 0;
   color: white;
   cursor: pointer;
