@@ -51,9 +51,9 @@
       Login com Google
     </button> 
   </div>-->
-  <div :class="this.formSent ? 'success' : 'failure'">
+<!--   <div :class="this.formSent ? 'success' : 'failure'">
     <p>{{ this.showMessage }}</p>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -81,7 +81,9 @@ export default {
     async Login(email, password) {
       if (email === "" || password === "") {
         this.formSent = false
-        this.showMessage = "Fill all the fields"
+        toast.info("Preenche os campos todos!", {
+              autoClose: 3000,
+            });
       } else {
         try {
           console.log(email, password)
@@ -158,7 +160,10 @@ export default {
               this.$router.push("/main2")
             }
 
-            this.showMessage = "login successful"
+
+            toast.info("Login com sucesso!", {
+              autoClose: 3000,
+            });
             this.formSent = true
           } else {
             this.formSent = false
