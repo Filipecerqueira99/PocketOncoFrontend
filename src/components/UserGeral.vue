@@ -155,7 +155,7 @@
     <div class="twoButtons">
         <div class="buttonOnLeft">
             <button class="buttonNext" @click.prevent="symptoms()"><img class="iconImg"
-                    src="../assets/icons/setting.png" alt="setting" /> Sintomas</button>
+                    src="../assets/icons/symtpoms.png" alt="setting" /> Sintomas</button>
         </div>
 
         <div class="buttonOnRight">

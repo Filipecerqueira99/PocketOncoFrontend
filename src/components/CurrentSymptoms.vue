@@ -8,35 +8,35 @@
    <h4>Selecione o que lhe preocupa mais hoje</h4>
    <div class="outsideBox">
     <div class="threelineBox">
-        <button class="buttonNav " @click.prevent="addToSymptomList(1)" :style="{ backgroundColor: this.symptom[1] == true ? '#03435c' : '#2C85A7' }">Dor<br>
+        <button class="buttonNav " @click.prevent="addToSymptomList(1)" :style="{ backgroundColor: this.symptom[1] == true ? '#03435c' : '#98d7b7' }">Dor<br>
             <img class="iconImg" src="../assets/symptoms/Dor.png" alt="Dor" />
         </button>
-        <button class="buttonNav" @click.prevent="addToSymptomList(2)" :style="{ backgroundColor: this.symptom[2] == true ? '#03435c' : '#2C85A7' }">Dispneia
+        <button class="buttonNav" @click.prevent="addToSymptomList(2)" :style="{ backgroundColor: this.symptom[2] == true ? '#03435c' : '#77c7a8' }">Dispneia
             <img class="iconImg" src="../assets/symptoms/Dispneia.png" alt="Dispneia" />
         </button>
-        <button class="buttonNav" @click.prevent="addToSymptomList(3)" :style="{ backgroundColor: this.symptom[3] == true ? '#03435c' : '#2C85A7' }">Insónia
+        <button class="buttonNav" @click.prevent="addToSymptomList(3)" :style="{ backgroundColor: this.symptom[3] == true ? '#03435c' : '#4ab195' }">Insónia
             <img class="iconImg" src="../assets/symptoms/Insonia.png" alt="Insonia" />
         </button>
     </div>
     <div class="threelineBox">
-        <button class="buttonNav " @click.prevent="addToSymptomList(4)" :style="{ backgroundColor: this.symptom[4] == true ? '#03435c' : '#2C85A7' }">Fadiga
+        <button class="buttonNav " @click.prevent="addToSymptomList(4)" :style="{ backgroundColor: this.symptom[4] == true ? '#03435c' : '#35a68c' }">Fadiga
             <img class="iconImg" src="../assets/symptoms/Fadiga.png" alt="Fadiga" />
         </button>
-        <button class="buttonNav" @click.prevent="addToSymptomList(5)" :style="{ backgroundColor: this.symptom[5] == true ? '#03435c' : '#2C85A7' }">Ansiedade
+        <button class="buttonNav" @click.prevent="addToSymptomList(5)" :style="{ backgroundColor: this.symptom[5] == true ? '#03435c' : '#14967F' }">Ansiedade
             <img class="iconImg" src="../assets/symptoms/Ansiedade.png" alt="Ansiedade" />
         </button>
-        <button class="buttonNav" @click.prevent="addToSymptomList(6)" :style="{ backgroundColor: this.symptom[6] == true ? '#03435c' : '#2C85A7' }">Anorexia
+        <button class="buttonNav" @click.prevent="addToSymptomList(6)" :style="{ backgroundColor: this.symptom[6] == true ? '#03435c' : '#128b7f' }">Anorexia
             <img class="iconImg" src="../assets/symptoms/Anorexia.png" alt="Anorexia" />
         </button>
     </div>
     <div class="threelineBox">
-        <button class="buttonNav" @click.prevent="addToSymptomList(7)" :style="{ backgroundColor: this.symptom[7] == true ? '#03435c' : '#2C85A7' }">Diarreia
+        <button class="buttonNav" @click.prevent="addToSymptomList(7)" :style="{ backgroundColor: this.symptom[7] == true ? '#03435c' : '#10807f' }">Diarreia
             <img class="iconImg" src="../assets/symptoms/Diarreia.png" alt="Diarreia" />
         </button>
-        <button class="buttonNav " @click.prevent="addToSymptomList(8)" :style="{ backgroundColor: this.symptom[8] == true ? '#03435c' : '#2C85A7' }">Obstipação
+        <button class="buttonNav " @click.prevent="addToSymptomList(8)" :style="{ backgroundColor: this.symptom[8] == true ? '#03435c' : '#0e767f' }">Obstipação
             <img class="iconImg" src="../assets/symptoms/Obstipação.png" alt="Obstipação" />
         </button>
-        <button class="buttonNav " @click.prevent="addToSymptomList(9)" :style="{ backgroundColor: this.symptom[9] == true ? '#03435c' : '#2C85A7' }">Vómitos
+        <button class="buttonNav " @click.prevent="addToSymptomList(9)" :style="{ backgroundColor: this.symptom[9] == true ? '#03435c' : '#0c6b7f' }">Vómitos
             <img class="iconImg" src="../assets/symptoms/Vómitos.png" alt="Vómitos" />
         </button>
     </div>
