@@ -7,7 +7,7 @@
             </div>
             <div class="twoButtons">
                 <button class="buttonAddFriends" @click.prevent="addFriendsLabel = !addFriendsLabel"><img
-                        class="iconImg" src="../assets/icons/share.png" alt="addFriends" /> Aceitar
+                        class="iconImg" src="../assets/icons/share.png" alt="addFriends" /> Adicionar
                     Amigos</button>
                 <button class="buttonShare" @click.prevent="shareProfile()"><img class="iconImg"
                         src="../assets/icons/share.png" alt="share" /> </button>
