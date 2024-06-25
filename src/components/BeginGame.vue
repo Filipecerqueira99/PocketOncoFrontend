@@ -116,7 +116,7 @@ export default {
     name: "BeginGame",
     data() {
         return {
-            userName: null,
+            userName: "",
             showHelp: false,
         };
     },

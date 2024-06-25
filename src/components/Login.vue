@@ -52,7 +52,7 @@
     </button> 
   </div>-->
 <!--   <div :class="this.formSent ? 'success' : 'failure'">
-    <p>{{ this.showMessage }}</p>
+
   </div> -->
 </template>
 
@@ -68,7 +68,7 @@ export default {
       email: "",
       password: "",
       formSent: false,
-      showMessage: "",
+
       changePassword: false,
       newPassword: false,
       emailNewPassword: "",
@@ -177,7 +177,6 @@ export default {
         }
       }
       setTimeout(() => {
-        this.showMessage = ""
       }, 5000)
     },
     signup() {
