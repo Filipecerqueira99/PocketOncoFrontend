@@ -1,6 +1,6 @@
 <template>
   <p class="title">PocketOnco</p>
-  <img class="loginImg" src="../assets/loginimg.png" alt="Folder" /><br>
+  <img class="loginImg" src="../assets/doctors/img1.png" alt="Folder" /><br>
   <form v-if="!this.newPassword">
     Email
     <input type="text" v-model="email" placeholder=""><br>
