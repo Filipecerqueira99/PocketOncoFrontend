@@ -163,9 +163,11 @@ export default {
                 this.gameModeChooser(response.data[0].type_id);
             } else {
                 console.log("random")
+                let userId = JSON.parse(localStorage.getItem("idUser"));
+
                 const response = await api({
                     method: 'get',
-                    url: `/questions/randomFiveQuestions`,
+                    url: `/questions/randomFiveQuestions/${userId}`,
                     data: {}
                 })
                 //console.log(response.data)
