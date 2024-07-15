@@ -34,32 +34,32 @@
             <button class="buttonNav" style="background-color: #98d7b7" @click.prevent="tematicGame(1)">Dor<br>
                 <img class="iconImg" src="../assets/symptoms/Dor.png" alt="Dor" />
             </button>
-            <button class="buttonNav" style="background-color: #77c7a8" @click.prevent="tematicGame(2)">Dispneia
+            <button class="buttonNav" style="background-color: #77c7a8" @click.prevent="tematicGame(2)">Dispneia<br>
                 <img class="iconImg" src="../assets/symptoms/Dispneia.png" alt="Dispneia" />
             </button>
-            <button class="buttonNav" style="background-color: #4ab195" @click.prevent="tematicGame(3)">Insónia
+            <button class="buttonNav" style="background-color: #4ab195" @click.prevent="tematicGame(3)">Insónia<br>
                 <img class="iconImg" src="../assets/symptoms/Insonia.png" alt="Insonia" />
             </button>
         </div>
         <div class="threelineBox">
-            <button class="buttonNav" style="background-color: #35a68c" @click.prevent="tematicGame(4)">Fadiga
+            <button class="buttonNav" style="background-color: #35a68c" @click.prevent="tematicGame(4)">Fadiga<br>
                 <img class="iconImg" src="../assets/symptoms/Fadiga.png" alt="Fadiga" />
             </button>
-            <button class="buttonNav" style="background-color: #14967F" @click.prevent="tematicGame(5)">Ansiedade
+            <button class="buttonNav" style="background-color: #14967F" @click.prevent="tematicGame(5)">Ansiedade<br>
                 <img class="iconImg" src="../assets/symptoms/Ansiedade.png" alt="Ansiedade" />
             </button>
-            <button class="buttonNav" style="background-color: #128b7f" @click.prevent="tematicGame(6)">Anorexia
+            <button class="buttonNav" style="background-color: #128b7f" @click.prevent="tematicGame(6)">Anorexia<br>
                 <img class="iconImg" src="../assets/symptoms/Anorexia.png" alt="Anorexia" />
             </button>
         </div>
         <div class="threelineBox">
-            <button class="buttonNav" style="background-color: #10807f" @click.prevent="tematicGame(7)">Diarreia
+            <button class="buttonNav" style="background-color: #10807f" @click.prevent="tematicGame(7)">Diarreia<br>
                 <img class="iconImg" src="../assets/symptoms/Diarreia.png" alt="Diarreia" />
             </button>
-            <button class="buttonNav" style="background-color: #0e767f" @click.prevent="tematicGame(8)">Obstipação
+            <button class="buttonNav" style="background-color: #0e767f" @click.prevent="tematicGame(8)">Obstipação<br>
                 <img class="iconImg" src="../assets/symptoms/Obstipação.png" alt="Obstipação" />
             </button>
-            <button class="buttonNav" style="background-color: #0c6b7f" @click.prevent="tematicGame(9)">Vómitos
+            <button class="buttonNav" style="background-color: #0c6b7f" @click.prevent="tematicGame(9)">Vómitos<br>
                 <img class="iconImg" src="../assets/symptoms/Vómitos.png" alt="Vómitos" />
             </button>
         </div>
@@ -92,6 +92,7 @@
 </template>
 
 <script>
+import api from '../api/api.js'
 /* eslint-disable */
 export default {
     name: "Main2",
@@ -114,16 +115,22 @@ export default {
             localStorage.setItem('playGame', false);
 
             //adicionar streak e ir para a página de sintomas caso seja o primeiro login
+
+
+
             var now = new Date();
             var day = now.getDate();
-            if (day > parseInt(JSON.parse(localStorage.getItem("points")))) {
+            //console.log(day)
+            //console.log(parseInt(JSON.parse(localStorage.getItem("today"))))
+            if (day != parseInt(JSON.parse(localStorage.getItem("today")))) {
+                console.log("entrei")
                 try {
                     const res = await api({
                         method: "post",
                         url: `/users/updateStreakAndToday`,
                         data: {
                             "idUser": userId,
-                            "streak": parseInt(JSON.parse(localStorage.getItem("streak"))) + 1,
+                            "streak": parseInt(JSON.parse(localStorage.getItem("today"))) + 1,
                             "today": day,
                         },
                     }).catch((error) => {
@@ -272,6 +279,4 @@ export default {
     cursor: pointer;
     width: 80%;
 }
-
-
 </style>

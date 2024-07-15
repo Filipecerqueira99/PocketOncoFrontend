@@ -71,6 +71,15 @@
         width: 100vw;
         height: 10vh;
       }
+      @media screen and (min-width: 1500px) {
+        .main-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: auto;
+          height: 10vh;   
+        }
+      }
       .container {
         width: 90%;
         height: 90%;
