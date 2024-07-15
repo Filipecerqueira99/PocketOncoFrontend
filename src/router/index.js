@@ -1,11 +1,7 @@
 import { createWebHistory, createRouter } from 'vue-router'
 import Login from '../components/Login.vue'
 import SignUp from '../components/SignUp.vue'
-//import Main from '../components/Main.vue'
-//import PublicPage from '../components/PublicPage.vue'
 import CurrentSymptoms from '../components/CurrentSymptoms.vue'
-import Content from '../components/Content.vue'
-import ContentPublic from '../components/ContentPublic.vue'
 import NotFound from '../components/NotFound.vue'
 import MultipleChoice from '../components/MultipleChoice.vue'
 import TwoChoice from '../components/TwoChoice.vue'
@@ -43,18 +39,6 @@ const routes = [
         hideNavbar: true,
       }
     },
-/*     { 
-      path: '/main', 
-      name: 'Main',
-      component: Main,
-      showRoute: ['private']
-    }, */
-/*     { 
-      path: '/public', 
-      name: 'Public',
-      component: PublicPage,
-      showRoute: ['public', 'private']
-    }, */
     { 
       path: '/currentSymptoms', 
       name: 'Current Symptoms',
@@ -163,19 +147,6 @@ const routes = [
       meta: {
         hideNavbar: false,
       }
-    },
-    
-    { 
-      path: '/folders/:folderId', 
-      name: 'Content',
-      component: Content,
-      showRoute: []
-    },
-    { 
-      path: '/folders/:idFolder/:nameUser/:nameFolder/public', 
-      name: 'ContentPublic',
-      component: ContentPublic,
-      showRoute: []
     },
     {
       path: "/:catchAll(.*)", 

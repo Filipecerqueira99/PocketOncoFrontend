@@ -5,8 +5,6 @@
           
           <div class="main-content">
             <router-view />
-            <!-- <Navbar /> -->
-            <!-- <BottomBar v-if="!$route.meta.hideNavbar"/> -->
           </div>
             
         </div>
@@ -14,14 +12,14 @@
 
   </template>
   <script>
-  import Navbar from './Navbar.vue'
+
 /*   import BottomBar from './BottomBar.vue'
  */
   /* eslint-disable */
   export default {
     name: 'Home',
     components: {
-      Navbar,
+
       /* BottomBar */
     },
     methods: {
