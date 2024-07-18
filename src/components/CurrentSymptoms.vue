@@ -8,8 +8,8 @@
     <h4>Selecione o que lhe preocupa mais hoje</h4>
     <div class="outsideBox">
         Legenda:<br>
-        <button class="buttonSel green ">Selecionado</button><br>
-        <button class="buttonSel blue ">Não Selecionado</button>
+        <button class="buttonSel blue ">Selecionado</button><br>
+        <button class="buttonSel green ">Não Selecionado</button>
         <p></p>
         <div class="threelineBox">
             <button class="buttonNav " @click.prevent="addToSymptomList(1)"
